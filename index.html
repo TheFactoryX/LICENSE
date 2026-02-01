@@ -1061,19 +1061,20 @@ https://github.com/TheFactoryX/LICENSE
             localStorage.setItem('anti-license-lang', lang);
         }
 
-        // Language link clicks
-        document.querySelectorAll('.lang-links a').forEach(a => {
-            a.addEventListener('click', (e) => {
+        // Language link clicks - use event delegation
+        document.getElementById('langLinks').addEventListener('click', function(e) {
+            const link = e.target.closest('a[data-lang]');
+            if (link) {
                 e.preventDefault();
-                setLanguage(a.dataset.lang);
-            });
+                setLanguage(link.dataset.lang);
+            }
         });
 
-        // Load saved language
-        const savedLang = localStorage.getItem('anti-license-lang');
-        if (savedLang && translations[savedLang]) {
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('anti-license-lang') || 'en';
             setLanguage(savedLang);
-        }
+        });
     </script>
 </body>
 </html>
