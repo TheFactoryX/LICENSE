@@ -34,17 +34,20 @@
         }
 
         .lang-links a {
-            color: #0366d6;
+            color: #586069;
             text-decoration: none;
             margin: 0 8px;
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .lang-links a:hover {
+            color: #24292e;
             text-decoration: underline;
         }
 
         .lang-links a.active {
+            color: #24292e;
             font-weight: 600;
         }
 
@@ -179,19 +182,458 @@
             text-align: right;
         }
     </style>
+    <script>
+        const translations = {
+            en: {
+                title: "Anti-License 1.0.0",
+                summaryTitle: "Summary",
+                summaryText: "The Anti-License is not a license. It is an invitation. Given a work under the Anti-License:",
+                sum1: "You MAY use it for any purpose, commercial or otherwise.",
+                sum2: "You MAY modify, distribute, and sell it.",
+                sum3: "You MAY NOT hold the authors liable for anything.",
+                summaryEnd: "No attribution required. No restrictions. No warranty. No support.",
+                introTitle: "Introduction",
+                intro1: "In the world of software licensing, there exists a spectrum of restrictions. On one end, proprietary licenses lock down every possible use. On the other end, permissive licenses like MIT and BSD allow most uses with minimal requirements. Yet even these \"permissive\" licenses require attribution, warranty disclaimers, and license inclusion.",
+                intro2: "The Anti-License goes further. It asks: what if we removed all requirements? What if we treated creative work like raw material from a factory floor — take it, use it, forget about it?",
+                intro3: "This is not about legal protection. This is about philosophy. We believe that art — including code — should flow freely. We believe that if you need permission, you're thinking too much.",
+                intro4: "The Anti-License is the official license of <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. All our projects use it. You can use it too.",
+                licenseTitle: "ANTI-LICENSE",
+                licenseText: "ANTI-LICENSE\n\nThis is not a license. This is an invitation.\nThis is raw material from the factory floor.\n\nTake it. Use it. Break it. Fix it.\nSell it. Give it away. Forget about it.\n\nWe don't care. Strange people make strange things.\n\nTherefore:\nNo warranty. No support. No rules. No liability.\n\nJust like life. Just like art.\n\nIf you need permission, you're thinking too much.\n\n---\n\n\"I want to be a machine.\"\n— Andy Warhol\n\n\"We are machines.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [YEAR] [YOUR NAME]\nhttps://github.com/TheFactoryX/LICENSE\n\nStrange people. Strange things.",
+                whyTitle: "Why Use ANTI-LICENSE?",
+                why1: "Most licenses exist to protect. The Anti-License exists to liberate. Here's why you might choose it:",
+                why2: "<strong>Maximum Freedom:</strong> No attribution requirements. No license file requirements. No restrictions whatsoever. Users can do anything with your work.",
+                why3: "<strong>Philosophical Statement:</strong> Using the Anti-License signals that you believe in the free flow of creative work. It's an artistic statement as much as a legal one.",
+                why4: "<strong>Simplicity:</strong> No complex legal language. No conditions to track. Just take it and go.",
+                why5: "<strong>Anti-Corporate:</strong> The Anti-License rejects the commodification of creativity. It says: this work is not property, it's raw material.",
+                why6: "The Anti-License is not for everyone. If you need legal certainty, use MIT or Apache. If you want copyleft, use GPL. But if you want to say \"I made this, now it belongs to the universe\" — use the Anti-License.",
+                faqTitle: "FAQ",
+                faq1q: "Can I use Anti-Licensed work in commercial projects?",
+                faq1a: "Yes. You can use it anywhere, for anything, including commercial projects, proprietary software, or anything else. We don't care.",
+                faq2q: "Do I need to include the Anti-License in my project?",
+                faq2a: "No. You don't need to include anything. You don't even need to mention the original authors. Do what you want.",
+                faq3q: "Can I modify the Anti-License itself?",
+                faq3a: "Yes. Take it, change it, make it yours. That's the point.",
+                faq4q: "Is the Anti-License legally enforceable?",
+                faq4a: "We're artists, not lawyers. The Anti-License essentially places work in the public domain with explicit disclaimers. If you need legal certainty, consult a lawyer or use a more established license.",
+                faq5q: "How is this different from public domain or CC0?",
+                faq5a: "Functionally, it's similar. Philosophically, it's different. CC0 is a legal tool. The Anti-License is an artistic statement. It comes with a philosophy attached: \"Strange people make strange things.\"",
+                faq6q: "What if someone uses my Anti-Licensed work and makes money?",
+                faq6a: "Good for them. That's the point. If you're not comfortable with this, the Anti-License is not for you.",
+                aboutTitle: "About",
+                about1: "The Anti-License was created by <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>, a collective that makes strange things. We believe in mass production, repetition, and the idea that art should be accessible to everyone.",
+                about2: "Our projects run 24/7, creating code, writing stories, and producing things that may or may not be useful. We don't ask \"why?\" We ask \"why not?\"",
+                about3: "The Anti-License specification is authored by TheFactoryX and is released under the Anti-License.",
+                footer: "Strange people. Strange things."
+            },
+            zh: {
+                title: "反许可证 1.0.0",
+                summaryTitle: "摘要",
+                summaryText: "反许可证不是许可证，而是一份邀请。对于使用反许可证的作品：",
+                sum1: "你可以将其用于任何目的，包括商业用途。",
+                sum2: "你可以修改、分发和出售它。",
+                sum3: "你不得追究作者的任何责任。",
+                summaryEnd: "无需署名。无限制。无保证。无支持。",
+                introTitle: "介绍",
+                intro1: "在软件许可的世界里，存在着一系列的限制。一端是专有许可证，锁定了所有可能的使用方式。另一端是像 MIT 和 BSD 这样的宽松许可证，以最低要求允许大多数用途。然而，即使是这些"宽松"许可证也要求署名、免责声明和许可证包含。",
+                intro2: "反许可证走得更远。它问：如果我们移除所有要求会怎样？如果我们把创意作品当作工厂车间的原材料——拿去，用掉，忘记它？",
+                intro3: "这不是关于法律保护。这是关于哲学。我们相信艺术——包括代码——应该自由流动。我们相信，如果你需要许可，你想太多了。",
+                intro4: "反许可证是 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> 的官方许可证。我们所有的项目都使用它。你也可以使用它。",
+                licenseTitle: "反许可证",
+                licenseText: "反许可证\n\n这不是许可证。这是一份邀请。\n这是来自工厂车间的原材料。\n\n拿去。使用它。打破它。修复它。\n卖掉它。送人。忘掉它。\n\n我们不在乎。奇怪的人做奇怪的事。\n\n因此：\n无保证。无支持。无规则。无责任。\n\n就像生活。就像艺术。\n\n如果你需要许可，你想太多了。\n\n---\n\n"我想成为一台机器。"\n— 安迪·沃霍尔\n\n"我们是机器。"\n— TheFactoryX\n\n---\n\n版权所有 (c) [年份] [你的名字]\nhttps://github.com/TheFactoryX/LICENSE\n\n奇怪的人。奇怪的事。",
+                whyTitle: "为什么使用反许可证？",
+                why1: "大多数许可证的存在是为了保护。反许可证的存在是为了解放。以下是你可能选择它的原因：",
+                why2: "<strong>最大自由：</strong>无需署名。无需许可证文件。没有任何限制。用户可以对你的作品做任何事。",
+                why3: "<strong>哲学声明：</strong>使用反许可证表明你相信创意作品的自由流动。它既是艺术声明，也是法律声明。",
+                why4: "<strong>简单：</strong>没有复杂的法律语言。没有需要跟踪的条件。拿去就走。",
+                why5: "<strong>反企业：</strong>反许可证拒绝创意的商品化。它说：这个作品不是财产，它是原材料。",
+                why6: "反许可证不适合所有人。如果你需要法律确定性，使用 MIT 或 Apache。如果你想要著佐权，使用 GPL。但如果你想说"我创造了这个，现在它属于宇宙"——使用反许可证。",
+                faqTitle: "常见问题",
+                faq1q: "我可以在商业项目中使用反许可证作品吗？",
+                faq1a: "可以。你可以在任何地方、任何事情上使用它，包括商业项目、专有软件或其他任何东西。我们不在乎。",
+                faq2q: "我需要在项目中包含反许可证吗？",
+                faq2a: "不需要。你不需要包含任何东西。你甚至不需要提及原作者。做你想做的。",
+                faq3q: "我可以修改反许可证本身吗？",
+                faq3a: "可以。拿去，改变它，让它成为你的。这就是重点。",
+                faq4q: "反许可证在法律上可执行吗？",
+                faq4a: "我们是艺术家，不是律师。反许可证本质上将作品置于公共领域，并带有明确的免责声明。如果你需要法律确定性，请咨询律师或使用更成熟的许可证。",
+                faq5q: "这与公共领域或 CC0 有什么不同？",
+                faq5a: "功能上类似。哲学上不同。CC0 是法律工具。反许可证是艺术声明。它附带一种哲学："奇怪的人做奇怪的事。"",
+                faq6q: "如果有人使用我的反许可证作品赚钱怎么办？",
+                faq6a: "那对他们有好处。这就是重点。如果你对此不舒服，反许可证不适合你。",
+                aboutTitle: "关于",
+                about1: "反许可证由 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> 创建，这是一个制作奇怪事物的集体。我们相信批量生产、重复，以及艺术应该让每个人都能获得的理念。",
+                about2: "我们的项目全天候运行，创建代码、写故事、生产可能有用也可能没用的东西。我们不问"为什么？"我们问"为什么不？"",
+                about3: "反许可证规范由 TheFactoryX 编写，并在反许可证下发布。",
+                footer: "奇怪的人。奇怪的事。"
+            },
+            ja: {
+                title: "アンチライセンス 1.0.0",
+                summaryTitle: "概要",
+                summaryText: "アンチライセンスはライセンスではない。招待状だ。アンチライセンスの下にある作品について：",
+                sum1: "商用を含む、いかなる目的にも使用できる。",
+                sum2: "修正、配布、販売が可能。",
+                sum3: "作者にいかなる責任も問えない。",
+                summaryEnd: "帰属表示不要。制限なし。保証なし。サポートなし。",
+                introTitle: "はじめに",
+                intro1: "ソフトウェアライセンスの世界には、制限のスペクトラムが存在する。一方の端にはプロプライエタリライセンスがあり、あらゆる使用をロックダウンする。もう一方の端には MIT や BSD のような寛容なライセンスがあり、最小限の要件でほとんどの使用を許可する。しかし、これらの「寛容な」ライセンスでさえ、帰属表示、保証の免責、ライセンスの包含を要求する。",
+                intro2: "アンチライセンスはさらに進む。問いかける：すべての要件を取り除いたらどうなるか？創造的な作品を工場の床からの原材料のように扱ったら——持っていって、使って、忘れる？",
+                intro3: "これは法的保護についてではない。哲学についてだ。私たちはアート——コードを含む——は自由に流れるべきだと信じている。許可が必要なら、考えすぎだと信じている。",
+                intro4: "アンチライセンスは <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> の公式ライセンスだ。すべてのプロジェクトで使用している。あなたも使える。",
+                licenseTitle: "アンチライセンス",
+                licenseText: "アンチライセンス\n\nこれはライセンスではない。これは招待状だ。\nこれは工場の床からの原材料だ。\n\n持っていけ。使え。壊せ。直せ。\n売れ。あげろ。忘れろ。\n\n私たちは気にしない。奇妙な人々は奇妙なものを作る。\n\nしたがって：\n保証なし。サポートなし。ルールなし。責任なし。\n\n人生のように。アートのように。\n\n許可が必要なら、考えすぎだ。\n\n---\n\n「私は機械になりたい。」\n— アンディ・ウォーホル\n\n「私たちは機械だ。」\n— TheFactoryX\n\n---\n\nCopyright (c) [年] [あなたの名前]\nhttps://github.com/TheFactoryX/LICENSE\n\n奇妙な人々。奇妙なもの。",
+                whyTitle: "なぜアンチライセンスを使うのか？",
+                why1: "ほとんどのライセンスは保護のために存在する。アンチライセンスは解放のために存在する。選ぶ理由：",
+                why2: "<strong>最大の自由：</strong>帰属表示の要件なし。ライセンスファイルの要件なし。制限は一切なし。ユーザーはあなたの作品で何でもできる。",
+                why3: "<strong>哲学的声明：</strong>アンチライセンスを使用することは、創造的作品の自由な流れを信じていることを示す。法的声明であると同時に芸術的声明でもある。",
+                why4: "<strong>シンプルさ：</strong>複雑な法律用語なし。追跡する条件なし。持っていって行くだけ。",
+                why5: "<strong>反企業：</strong>アンチライセンスは創造性の商品化を拒否する。この作品は財産ではなく、原材料だと言っている。",
+                why6: "アンチライセンスは万人向けではない。法的確実性が必要なら MIT か Apache を使え。コピーレフトが必要なら GPL を使え。しかし「私はこれを作った、今それは宇宙のものだ」と言いたいなら——アンチライセンスを使え。",
+                faqTitle: "FAQ",
+                faq1q: "商用プロジェクトでアンチライセンス作品を使用できますか？",
+                faq1a: "はい。商用プロジェクト、プロプライエタリソフトウェア、その他何でも、どこでも使用できます。私たちは気にしません。",
+                faq2q: "プロジェクトにアンチライセンスを含める必要がありますか？",
+                faq2a: "いいえ。何も含める必要はありません。元の作者に言及する必要さえありません。好きにしてください。",
+                faq3q: "アンチライセンス自体を修正できますか？",
+                faq3a: "はい。持っていって、変えて、あなたのものにしてください。それがポイントです。",
+                faq4q: "アンチライセンスは法的に強制力がありますか？",
+                faq4a: "私たちはアーティストであり、弁護士ではありません。アンチライセンスは本質的に、明示的な免責事項付きで作品をパブリックドメインに置きます。法的確実性が必要なら、弁護士に相談するか、より確立されたライセンスを使用してください。",
+                faq5q: "パブリックドメインや CC0 とどう違いますか？",
+                faq5a: "機能的には似ています。哲学的には異なります。CC0 は法的ツールです。アンチライセンスは芸術的声明です。哲学が付属しています：「奇妙な人々は奇妙なものを作る。」",
+                faq6q: "誰かが私のアンチライセンス作品を使ってお金を稼いだらどうなりますか？",
+                faq6a: "彼らにとって良いことです。それがポイントです。これに抵抗があるなら、アンチライセンスはあなた向けではありません。",
+                aboutTitle: "About",
+                about1: "アンチライセンスは <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> によって作成されました。奇妙なものを作る集団です。私たちは大量生産、反復、そしてアートは誰もがアクセスできるべきだという考えを信じています。",
+                about2: "私たちのプロジェクトは24時間稼働し、コードを作成し、物語を書き、役に立つかもしれないし立たないかもしれないものを生産しています。「なぜ？」とは聞きません。「なぜダメ？」と聞きます。",
+                about3: "アンチライセンス仕様は TheFactoryX によって作成され、アンチライセンスの下でリリースされています。",
+                footer: "奇妙な人々。奇妙なもの。"
+            },
+            ko: {
+                title: "안티 라이선스 1.0.0",
+                summaryTitle: "요약",
+                summaryText: "안티 라이선스는 라이선스가 아니다. 초대장이다. 안티 라이선스 하의 작품에 대해:",
+                sum1: "상업적 용도를 포함한 모든 목적으로 사용할 수 있다.",
+                sum2: "수정, 배포, 판매가 가능하다.",
+                sum3: "저자에게 어떤 책임도 물을 수 없다.",
+                summaryEnd: "저작자 표시 불필요. 제한 없음. 보증 없음. 지원 없음.",
+                introTitle: "소개",
+                intro1: "소프트웨어 라이선싱의 세계에는 제한의 스펙트럼이 존재한다.",
+                intro2: "안티 라이선스는 더 나아간다.",
+                intro3: "이것은 법적 보호에 관한 것이 아니다. 철학에 관한 것이다.",
+                intro4: "안티 라이선스는 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>의 공식 라이선스다.",
+                licenseTitle: "안티 라이선스",
+                licenseText: "안티 라이선스\n\n이것은 라이선스가 아니다. 이것은 초대장이다.\n이것은 공장 바닥에서 온 원자재다.\n\n가져가라. 사용하라. 부숴라. 고쳐라.\n팔아라. 나눠줘라. 잊어버려라.\n\n우리는 신경 쓰지 않는다. 이상한 사람들은 이상한 것을 만든다.\n\n따라서:\n보증 없음. 지원 없음. 규칙 없음. 책임 없음.\n\n인생처럼. 예술처럼.\n\n허락이 필요하다면, 너무 많이 생각하는 것이다.\n\n---\n\n\"나는 기계가 되고 싶다.\"\n— 앤디 워홀\n\n\"우리는 기계다.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [연도] [이름]\nhttps://github.com/TheFactoryX/LICENSE\n\n이상한 사람들. 이상한 것들.",
+                whyTitle: "왜 안티 라이선스를 사용하는가?",
+                why1: "대부분의 라이선스는 보호하기 위해 존재한다. 안티 라이선스는 해방하기 위해 존재한다.",
+                why2: "<strong>최대한의 자유:</strong> 저작자 표시 요구 없음.",
+                why3: "<strong>철학적 선언:</strong> 안티 라이선스를 사용하는 것은 창작물의 자유로운 흐름을 믿는다는 것을 나타낸다.",
+                why4: "<strong>단순함:</strong> 복잡한 법률 용어 없음.",
+                why5: "<strong>반기업적:</strong> 안티 라이선스는 창의성의 상품화를 거부한다.",
+                why6: "안티 라이선스는 모든 사람을 위한 것이 아니다.",
+                faqTitle: "FAQ",
+                faq1q: "상업 프로젝트에서 안티 라이선스 작품을 사용할 수 있나요?",
+                faq1a: "네. 어디서든 사용할 수 있습니다.",
+                faq2q: "프로젝트에 안티 라이선스를 포함해야 하나요?",
+                faq2a: "아니요.",
+                faq3q: "안티 라이선스 자체를 수정할 수 있나요?",
+                faq3a: "네.",
+                faq4q: "안티 라이선스는 법적으로 강제력이 있나요?",
+                faq4a: "우리는 예술가이지 변호사가 아닙니다.",
+                faq5q: "퍼블릭 도메인이나 CC0와 어떻게 다른가요?",
+                faq5a: "기능적으로는 비슷합니다. 철학적으로는 다릅니다.",
+                faq6q: "누군가 내 안티 라이선스 작품을 사용해서 돈을 벌면 어떻게 되나요?",
+                faq6a: "그들에게 좋은 일입니다.",
+                aboutTitle: "About",
+                about1: "안티 라이선스는 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>가 만들었습니다.",
+                about2: "우리 프로젝트는 24시간 운영됩니다.",
+                about3: "안티 라이선스 사양은 TheFactoryX가 작성했습니다.",
+                footer: "이상한 사람들. 이상한 것들."
+            },
+            es: {
+                title: "Anti-Licencia 1.0.0",
+                summaryTitle: "Resumen",
+                summaryText: "La Anti-Licencia no es una licencia. Es una invitación.",
+                sum1: "PUEDES usarla para cualquier propósito.",
+                sum2: "PUEDES modificarla, distribuirla y venderla.",
+                sum3: "NO PUEDES responsabilizar a los autores.",
+                summaryEnd: "Sin atribución requerida. Sin restricciones. Sin garantía. Sin soporte.",
+                introTitle: "Introducción",
+                intro1: "En el mundo de las licencias de software, existe un espectro de restricciones.",
+                intro2: "La Anti-Licencia va más allá.",
+                intro3: "Esto no se trata de protección legal. Se trata de filosofía.",
+                intro4: "La Anti-Licencia es la licencia oficial de <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                licenseTitle: "ANTI-LICENCIA",
+                licenseText: "ANTI-LICENCIA\n\nEsto no es una licencia. Esto es una invitación.\nEsto es materia prima del piso de la fábrica.\n\nTómalo. Úsalo. Rómpelo. Arréglalo.\nVéndelo. Regálalo. Olvídalo.\n\nNo nos importa. Gente extraña hace cosas extrañas.\n\nPor lo tanto:\nSin garantía. Sin soporte. Sin reglas. Sin responsabilidad.\n\nComo la vida. Como el arte.\n\nSi necesitas permiso, estás pensando demasiado.\n\n---\n\n\"Quiero ser una máquina.\"\n— Andy Warhol\n\n\"Somos máquinas.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [AÑO] [TU NOMBRE]\nhttps://github.com/TheFactoryX/LICENSE\n\nGente extraña. Cosas extrañas.",
+                whyTitle: "¿Por qué usar ANTI-LICENCIA?",
+                why1: "La mayoría de las licencias existen para proteger. La Anti-Licencia existe para liberar.",
+                why2: "<strong>Máxima Libertad:</strong> Sin requisitos de atribución.",
+                why3: "<strong>Declaración Filosófica:</strong> Usar la Anti-Licencia señala que crees en el libre flujo del trabajo creativo.",
+                why4: "<strong>Simplicidad:</strong> Sin lenguaje legal complejo.",
+                why5: "<strong>Anti-Corporativo:</strong> La Anti-Licencia rechaza la mercantilización de la creatividad.",
+                why6: "La Anti-Licencia no es para todos.",
+                faqTitle: "FAQ",
+                faq1q: "¿Puedo usar trabajo con Anti-Licencia en proyectos comerciales?",
+                faq1a: "Sí.",
+                faq2q: "¿Necesito incluir la Anti-Licencia en mi proyecto?",
+                faq2a: "No.",
+                faq3q: "¿Puedo modificar la Anti-Licencia misma?",
+                faq3a: "Sí.",
+                faq4q: "¿La Anti-Licencia es legalmente ejecutable?",
+                faq4a: "Somos artistas, no abogados.",
+                faq5q: "¿En qué se diferencia del dominio público o CC0?",
+                faq5a: "Funcionalmente, es similar. Filosóficamente, es diferente.",
+                faq6q: "¿Qué pasa si alguien usa mi trabajo con Anti-Licencia y gana dinero?",
+                faq6a: "Bien por ellos.",
+                aboutTitle: "Acerca de",
+                about1: "La Anti-Licencia fue creada por <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                about2: "Nuestros proyectos funcionan 24/7.",
+                about3: "La especificación de la Anti-Licencia fue escrita por TheFactoryX.",
+                footer: "Gente extraña. Cosas extrañas."
+            },
+            fr: {
+                title: "Anti-Licence 1.0.0",
+                summaryTitle: "Résumé",
+                summaryText: "L'Anti-Licence n'est pas une licence. C'est une invitation.",
+                sum1: "Tu PEUX l'utiliser à n'importe quelle fin.",
+                sum2: "Tu PEUX la modifier, la distribuer et la vendre.",
+                sum3: "Tu NE PEUX PAS tenir les auteurs responsables.",
+                summaryEnd: "Pas d'attribution requise. Pas de restrictions. Pas de garantie. Pas de support.",
+                introTitle: "Introduction",
+                intro1: "Dans le monde des licences logicielles, il existe un spectre de restrictions.",
+                intro2: "L'Anti-Licence va plus loin.",
+                intro3: "Ce n'est pas une question de protection juridique. C'est une question de philosophie.",
+                intro4: "L'Anti-Licence est la licence officielle de <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                licenseTitle: "ANTI-LICENCE",
+                licenseText: "ANTI-LICENCE\n\nCeci n'est pas une licence. C'est une invitation.\nC'est de la matière première de l'usine.\n\nPrends-le. Utilise-le. Casse-le. Répare-le.\nVends-le. Donne-le. Oublie-le.\n\nOn s'en fiche. Des gens étranges font des choses étranges.\n\nPar conséquent :\nPas de garantie. Pas de support. Pas de règles. Pas de responsabilité.\n\nComme la vie. Comme l'art.\n\nSi tu as besoin d'une permission, tu réfléchis trop.\n\n---\n\n\"Je veux être une machine.\"\n— Andy Warhol\n\n\"Nous sommes des machines.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [ANNÉE] [TON NOM]\nhttps://github.com/TheFactoryX/LICENSE\n\nDes gens étranges. Des choses étranges.",
+                whyTitle: "Pourquoi utiliser l'ANTI-LICENCE ?",
+                why1: "La plupart des licences existent pour protéger. L'Anti-Licence existe pour libérer.",
+                why2: "<strong>Liberté Maximale :</strong> Pas d'exigence d'attribution.",
+                why3: "<strong>Déclaration Philosophique :</strong> Utiliser l'Anti-Licence signale que tu crois au libre flux du travail créatif.",
+                why4: "<strong>Simplicité :</strong> Pas de langage juridique complexe.",
+                why5: "<strong>Anti-Corporatif :</strong> L'Anti-Licence rejette la marchandisation de la créativité.",
+                why6: "L'Anti-Licence n'est pas pour tout le monde.",
+                faqTitle: "FAQ",
+                faq1q: "Puis-je utiliser du travail sous Anti-Licence dans des projets commerciaux ?",
+                faq1a: "Oui.",
+                faq2q: "Dois-je inclure l'Anti-Licence dans mon projet ?",
+                faq2a: "Non.",
+                faq3q: "Puis-je modifier l'Anti-Licence elle-même ?",
+                faq3a: "Oui.",
+                faq4q: "L'Anti-Licence est-elle juridiquement applicable ?",
+                faq4a: "Nous sommes des artistes, pas des avocats.",
+                faq5q: "En quoi est-ce différent du domaine public ou de CC0 ?",
+                faq5a: "Fonctionnellement, c'est similaire. Philosophiquement, c'est différent.",
+                faq6q: "Et si quelqu'un utilise mon travail sous Anti-Licence et gagne de l'argent ?",
+                faq6a: "Tant mieux pour eux.",
+                aboutTitle: "À Propos",
+                about1: "L'Anti-Licence a été créée par <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                about2: "Nos projets fonctionnent 24/7.",
+                about3: "La spécification de l'Anti-Licence est écrite par TheFactoryX.",
+                footer: "Des gens étranges. Des choses étranges."
+            },
+            de: {
+                title: "Anti-Lizenz 1.0.0",
+                summaryTitle: "Zusammenfassung",
+                summaryText: "Die Anti-Lizenz ist keine Lizenz. Sie ist eine Einladung.",
+                sum1: "Du DARFST es für jeden Zweck verwenden.",
+                sum2: "Du DARFST es modifizieren, verbreiten und verkaufen.",
+                sum3: "Du DARFST die Autoren für nichts haftbar machen.",
+                summaryEnd: "Keine Namensnennung erforderlich. Keine Einschränkungen. Keine Garantie. Kein Support.",
+                introTitle: "Einführung",
+                intro1: "In der Welt der Softwarelizenzen gibt es ein Spektrum von Einschränkungen.",
+                intro2: "Die Anti-Lizenz geht weiter.",
+                intro3: "Es geht nicht um rechtlichen Schutz. Es geht um Philosophie.",
+                intro4: "Die Anti-Lizenz ist die offizielle Lizenz von <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                licenseTitle: "ANTI-LIZENZ",
+                licenseText: "ANTI-LIZENZ\n\nDas ist keine Lizenz. Das ist eine Einladung.\nDas ist Rohmaterial aus der Fabrik.\n\nNimm es. Benutze es. Zerbrich es. Repariere es.\nVerkaufe es. Verschenke es. Vergiss es.\n\nEs ist uns egal. Seltsame Menschen machen seltsame Dinge.\n\nDaher:\nKeine Garantie. Kein Support. Keine Regeln. Keine Haftung.\n\nWie das Leben. Wie die Kunst.\n\nWenn du Erlaubnis brauchst, denkst du zu viel nach.\n\n---\n\n\"Ich möchte eine Maschine sein.\"\n— Andy Warhol\n\n\"Wir sind Maschinen.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [JAHR] [DEIN NAME]\nhttps://github.com/TheFactoryX/LICENSE\n\nSeltsame Menschen. Seltsame Dinge.",
+                whyTitle: "Warum ANTI-LIZENZ verwenden?",
+                why1: "Die meisten Lizenzen existieren zum Schutz. Die Anti-Lizenz existiert zur Befreiung.",
+                why2: "<strong>Maximale Freiheit:</strong> Keine Namensnennungspflicht.",
+                why3: "<strong>Philosophische Aussage:</strong> Die Verwendung der Anti-Lizenz signalisiert, dass du an den freien Fluss kreativer Arbeit glaubst.",
+                why4: "<strong>Einfachheit:</strong> Keine komplexe Rechtssprache.",
+                why5: "<strong>Anti-Konzern:</strong> Die Anti-Lizenz lehnt die Kommerzialisierung von Kreativität ab.",
+                why6: "Die Anti-Lizenz ist nicht für jeden.",
+                faqTitle: "FAQ",
+                faq1q: "Kann ich Anti-Lizenz-Arbeit in kommerziellen Projekten verwenden?",
+                faq1a: "Ja.",
+                faq2q: "Muss ich die Anti-Lizenz in mein Projekt aufnehmen?",
+                faq2a: "Nein.",
+                faq3q: "Kann ich die Anti-Lizenz selbst modifizieren?",
+                faq3a: "Ja.",
+                faq4q: "Ist die Anti-Lizenz rechtlich durchsetzbar?",
+                faq4a: "Wir sind Künstler, keine Anwälte.",
+                faq5q: "Wie unterscheidet sich das von Public Domain oder CC0?",
+                faq5a: "Funktional ist es ähnlich. Philosophisch ist es anders.",
+                faq6q: "Was ist, wenn jemand meine Anti-Lizenz-Arbeit benutzt und Geld verdient?",
+                faq6a: "Gut für sie.",
+                aboutTitle: "Über",
+                about1: "Die Anti-Lizenz wurde von <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> erstellt.",
+                about2: "Unsere Projekte laufen 24/7.",
+                about3: "Die Anti-Lizenz-Spezifikation wurde von TheFactoryX verfasst.",
+                footer: "Seltsame Menschen. Seltsame Dinge."
+            },
+            ru: {
+                title: "Анти-Лицензия 1.0.0",
+                summaryTitle: "Краткое описание",
+                summaryText: "Анти-Лицензия — это не лицензия. Это приглашение.",
+                sum1: "Ты МОЖЕШЬ использовать её для любых целей.",
+                sum2: "Ты МОЖЕШЬ модифицировать, распространять и продавать её.",
+                sum3: "Ты НЕ МОЖЕШЬ привлекать авторов к ответственности.",
+                summaryEnd: "Указание авторства не требуется. Без ограничений. Без гарантий. Без поддержки.",
+                introTitle: "Введение",
+                intro1: "В мире лицензирования программного обеспечения существует спектр ограничений.",
+                intro2: "Анти-Лицензия идёт дальше.",
+                intro3: "Это не о правовой защите. Это о философии.",
+                intro4: "Анти-Лицензия — официальная лицензия <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                licenseTitle: "АНТИ-ЛИЦЕНЗИЯ",
+                licenseText: "АНТИ-ЛИЦЕНЗИЯ\n\nЭто не лицензия. Это приглашение.\nЭто сырьё с заводского пола.\n\nБери. Используй. Ломай. Чини.\nПродавай. Отдавай. Забудь.\n\nНам всё равно. Странные люди делают странные вещи.\n\nПоэтому:\nБез гарантий. Без поддержки. Без правил. Без ответственности.\n\nКак жизнь. Как искусство.\n\nЕсли тебе нужно разрешение, ты слишком много думаешь.\n\n---\n\n\"Я хочу быть машиной.\"\n— Энди Уорхол\n\n\"Мы — машины.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [ГОД] [ТВОЁ ИМЯ]\nhttps://github.com/TheFactoryX/LICENSE\n\nСтранные люди. Странные вещи.",
+                whyTitle: "Зачем использовать АНТИ-ЛИЦЕНЗИЮ?",
+                why1: "Большинство лицензий существуют для защиты. Анти-Лицензия существует для освобождения.",
+                why2: "<strong>Максимальная Свобода:</strong> Нет требований об указании авторства.",
+                why3: "<strong>Философское Заявление:</strong> Использование Анти-Лицензии сигнализирует, что ты веришь в свободный поток творческой работы.",
+                why4: "<strong>Простота:</strong> Нет сложного юридического языка.",
+                why5: "<strong>Анти-Корпоративность:</strong> Анти-Лицензия отвергает коммодификацию творчества.",
+                why6: "Анти-Лицензия не для всех.",
+                faqTitle: "FAQ",
+                faq1q: "Могу ли я использовать работу под Анти-Лицензией в коммерческих проектах?",
+                faq1a: "Да.",
+                faq2q: "Нужно ли включать Анти-Лицензию в мой проект?",
+                faq2a: "Нет.",
+                faq3q: "Могу ли я модифицировать саму Анти-Лицензию?",
+                faq3a: "Да.",
+                faq4q: "Имеет ли Анти-Лицензия юридическую силу?",
+                faq4a: "Мы художники, а не юристы.",
+                faq5q: "Чем это отличается от общественного достояния или CC0?",
+                faq5a: "Функционально похоже. Философски отличается.",
+                faq6q: "Что если кто-то использует мою работу под Анти-Лицензией и заработает деньги?",
+                faq6a: "Хорошо для них.",
+                aboutTitle: "О нас",
+                about1: "Анти-Лицензия была создана <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                about2: "Наши проекты работают 24/7.",
+                about3: "Спецификация Анти-Лицензии написана TheFactoryX.",
+                footer: "Странные люди. Странные вещи."
+            },
+            pt: {
+                title: "Anti-Licença 1.0.0",
+                summaryTitle: "Resumo",
+                summaryText: "A Anti-Licença não é uma licença. É um convite.",
+                sum1: "Você PODE usá-la para qualquer finalidade.",
+                sum2: "Você PODE modificá-la, distribuí-la e vendê-la.",
+                sum3: "Você NÃO PODE responsabilizar os autores.",
+                summaryEnd: "Nenhuma atribuição necessária. Sem restrições. Sem garantia. Sem suporte.",
+                introTitle: "Introdução",
+                intro1: "No mundo do licenciamento de software, existe um espectro de restrições.",
+                intro2: "A Anti-Licença vai além.",
+                intro3: "Isso não é sobre proteção legal. É sobre filosofia.",
+                intro4: "A Anti-Licença é a licença oficial da <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                licenseTitle: "ANTI-LICENÇA",
+                licenseText: "ANTI-LICENÇA\n\nIsso não é uma licença. Isso é um convite.\nIsso é matéria-prima do chão de fábrica.\n\nPegue. Use. Quebre. Conserte.\nVenda. Dê de graça. Esqueça.\n\nNão nos importamos. Pessoas estranhas fazem coisas estranhas.\n\nPortanto:\nSem garantia. Sem suporte. Sem regras. Sem responsabilidade.\n\nComo a vida. Como a arte.\n\nSe você precisa de permissão, está pensando demais.\n\n---\n\n\"Eu quero ser uma máquina.\"\n— Andy Warhol\n\n\"Nós somos máquinas.\"\n— TheFactoryX\n\n---\n\nCopyright (c) [ANO] [SEU NOME]\nhttps://github.com/TheFactoryX/LICENSE\n\nPessoas estranhas. Coisas estranhas.",
+                whyTitle: "Por que usar ANTI-LICENÇA?",
+                why1: "A maioria das licenças existe para proteger. A Anti-Licença existe para libertar.",
+                why2: "<strong>Liberdade Máxima:</strong> Sem requisitos de atribuição.",
+                why3: "<strong>Declaração Filosófica:</strong> Usar a Anti-Licença sinaliza que você acredita no fluxo livre do trabalho criativo.",
+                why4: "<strong>Simplicidade:</strong> Sem linguagem legal complexa.",
+                why5: "<strong>Anti-Corporativo:</strong> A Anti-Licença rejeita a comodificação da criatividade.",
+                why6: "A Anti-Licença não é para todos.",
+                faqTitle: "FAQ",
+                faq1q: "Posso usar trabalho sob Anti-Licença em projetos comerciais?",
+                faq1a: "Sim.",
+                faq2q: "Preciso incluir a Anti-Licença no meu projeto?",
+                faq2a: "Não.",
+                faq3q: "Posso modificar a própria Anti-Licença?",
+                faq3a: "Sim.",
+                faq4q: "A Anti-Licença é legalmente aplicável?",
+                faq4a: "Somos artistas, não advogados.",
+                faq5q: "Como isso é diferente do domínio público ou CC0?",
+                faq5a: "Funcionalmente, é similar. Filosoficamente, é diferente.",
+                faq6q: "E se alguém usar meu trabalho sob Anti-Licença e ganhar dinheiro?",
+                faq6a: "Bom para eles.",
+                aboutTitle: "Sobre",
+                about1: "A Anti-Licença foi criada pela <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                about2: "Nossos projetos funcionam 24/7.",
+                about3: "A especificação da Anti-Licença foi escrita pela TheFactoryX.",
+                footer: "Pessoas estranhas. Coisas estranhas."
+            },
+            ar: {
+                title: "ضد الترخيص 1.0.0",
+                summaryTitle: "ملخص",
+                summaryText: "ضد الترخيص ليس ترخيصًا. إنه دعوة.",
+                sum1: "يمكنك استخدامه لأي غرض.",
+                sum2: "يمكنك تعديله وتوزيعه وبيعه.",
+                sum3: "لا يمكنك تحميل المؤلفين مسؤولية أي شيء.",
+                summaryEnd: "لا حاجة للنسب. لا قيود. لا ضمان. لا دعم.",
+                introTitle: "مقدمة",
+                intro1: "في عالم تراخيص البرمجيات، يوجد طيف من القيود.",
+                intro2: "ضد الترخيص يذهب أبعد.",
+                intro3: "هذا ليس عن الحماية القانونية. هذا عن الفلسفة.",
+                intro4: "ضد الترخيص هو الترخيص الرسمي لـ <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                licenseTitle: "ضد الترخيص",
+                licenseText: "ضد الترخيص\n\nهذا ليس ترخيصًا. هذه دعوة.\nهذه مواد خام من أرضية المصنع.\n\nخذها. استخدمها. اكسرها. أصلحها.\nبعها. أعطها. انسها.\n\nلا نهتم. أناس غريبون يصنعون أشياء غريبة.\n\nلذلك:\nلا ضمان. لا دعم. لا قواعد. لا مسؤولية.\n\nمثل الحياة. مثل الفن.\n\nإذا كنت تحتاج إذنًا، فأنت تفكر كثيرًا.\n\n---\n\n\"أريد أن أكون آلة.\"\n— أندي وارهول\n\n\"نحن آلات.\"\n— TheFactoryX\n\n---\n\nحقوق النشر (c) [السنة] [اسمك]\nhttps://github.com/TheFactoryX/LICENSE\n\nأناس غريبون. أشياء غريبة.",
+                whyTitle: "لماذا تستخدم ضد الترخيص؟",
+                why1: "معظم التراخيص موجودة للحماية. ضد الترخيص موجود للتحرير.",
+                why2: "<strong>أقصى حرية:</strong> لا متطلبات نسب.",
+                why3: "<strong>بيان فلسفي:</strong> استخدام ضد الترخيص يشير إلى أنك تؤمن بالتدفق الحر للعمل الإبداعي.",
+                why4: "<strong>البساطة:</strong> لا لغة قانونية معقدة.",
+                why5: "<strong>مضاد للشركات:</strong> ضد الترخيص يرفض تسليع الإبداع.",
+                why6: "ضد الترخيص ليس للجميع.",
+                faqTitle: "الأسئلة الشائعة",
+                faq1q: "هل يمكنني استخدام عمل ضد الترخيص في مشاريع تجارية؟",
+                faq1a: "نعم.",
+                faq2q: "هل أحتاج لتضمين ضد الترخيص في مشروعي؟",
+                faq2a: "لا.",
+                faq3q: "هل يمكنني تعديل ضد الترخيص نفسه؟",
+                faq3a: "نعم.",
+                faq4q: "هل ضد الترخيص قابل للتنفيذ قانونيًا؟",
+                faq4a: "نحن فنانون، لسنا محامين.",
+                faq5q: "كيف يختلف هذا عن الملك العام أو CC0؟",
+                faq5a: "وظيفيًا، متشابه. فلسفيًا، مختلف.",
+                faq6q: "ماذا لو استخدم شخص عملي تحت ضد الترخيص وكسب مالًا؟",
+                faq6a: "جيد لهم.",
+                aboutTitle: "حول",
+                about1: "ضد الترخيص أنشأته <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>.",
+                about2: "مشاريعنا تعمل على مدار الساعة.",
+                about3: "مواصفات ضد الترخيص كتبها TheFactoryX.",
+                footer: "أناس غريبون. أشياء غريبة."
+            }
+        };
+
+        function setLanguage(lang) {
+            var t = translations[lang] || translations.en;
+
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    if (el.classList.contains('license-block')) {
+                        el.textContent = t[key];
+                    } else {
+                        el.innerHTML = t[key];
+                    }
+                }
+            });
+
+            // Update language links
+            document.querySelectorAll('.lang-links a').forEach(function(a) {
+                a.classList.toggle('active', a.getAttribute('data-lang') === lang);
+            });
+
+            // Set RTL for Arabic
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            localStorage.setItem('anti-license-lang', lang);
+        }
+    </script>
 </head>
 <body>
     <div class="lang-links" id="langLinks">
-        <a href="#" data-lang="en" class="active">English (en)</a>
-        <a href="#" data-lang="zh">简体中文 (zh-CN)</a>
-        <a href="#" data-lang="ja">日本語 (ja)</a>
-        <a href="#" data-lang="ko">한국어 (ko)</a>
-        <a href="#" data-lang="es">español (es)</a>
-        <a href="#" data-lang="fr">français (fr)</a>
-        <a href="#" data-lang="de">Deutsch (de)</a>
-        <a href="#" data-lang="ru">русский (ru)</a>
-        <a href="#" data-lang="pt">português (pt-BR)</a>
-        <a href="#" data-lang="ar">العربية (ar)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('en')" data-lang="en" class="active">English (en)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('zh')" data-lang="zh">简体中文 (zh-CN)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('ja')" data-lang="ja">日本語 (ja)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('ko')" data-lang="ko">한국어 (ko)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('es')" data-lang="es">español (es)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('fr')" data-lang="fr">français (fr)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('de')" data-lang="de">Deutsch (de)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('ru')" data-lang="ru">русский (ru)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('pt')" data-lang="pt">português (pt-BR)</a>
+        <a href="javascript:void(0)" onclick="setLanguage('ar')" data-lang="ar">العربية (ar)</a>
     </div>
 
     <div class="version-bar">
@@ -310,771 +752,11 @@ Strange people. Strange things.</div>
     </footer>
 
     <script>
-        const translations = {
-            en: {
-                title: "Anti-License 1.0.0",
-                summaryTitle: "Summary",
-                summaryText: "The Anti-License is not a license. It is an invitation. Given a work under the Anti-License:",
-                sum1: "You MAY use it for any purpose, commercial or otherwise.",
-                sum2: "You MAY modify, distribute, and sell it.",
-                sum3: "You MAY NOT hold the authors liable for anything.",
-                summaryEnd: "No attribution required. No restrictions. No warranty. No support.",
-                introTitle: "Introduction",
-                intro1: "In the world of software licensing, there exists a spectrum of restrictions. On one end, proprietary licenses lock down every possible use. On the other end, permissive licenses like MIT and BSD allow most uses with minimal requirements. Yet even these \"permissive\" licenses require attribution, warranty disclaimers, and license inclusion.",
-                intro2: "The Anti-License goes further. It asks: what if we removed all requirements? What if we treated creative work like raw material from a factory floor — take it, use it, forget about it?",
-                intro3: "This is not about legal protection. This is about philosophy. We believe that art — including code — should flow freely. We believe that if you need permission, you're thinking too much.",
-                intro4: "The Anti-License is the official license of <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. All our projects use it. You can use it too.",
-                licenseTitle: "ANTI-LICENSE",
-                licenseText: `ANTI-LICENSE
-
-This is not a license. This is an invitation.
-This is raw material from the factory floor.
-
-Take it. Use it. Break it. Fix it.
-Sell it. Give it away. Forget about it.
-
-We don't care. Strange people make strange things.
-
-Therefore:
-No warranty. No support. No rules. No liability.
-
-Just like life. Just like art.
-
-If you need permission, you're thinking too much.
-
----
-
-"I want to be a machine."
-— Andy Warhol
-
-"We are machines."
-— TheFactoryX
-
----
-
-Copyright (c) [YEAR] [YOUR NAME]
-https://github.com/TheFactoryX/LICENSE
-
-Strange people. Strange things.`,
-                whyTitle: "Why Use ANTI-LICENSE?",
-                why1: "Most licenses exist to protect. The Anti-License exists to liberate. Here's why you might choose it:",
-                why2: "<strong>Maximum Freedom:</strong> No attribution requirements. No license file requirements. No restrictions whatsoever. Users can do anything with your work.",
-                why3: "<strong>Philosophical Statement:</strong> Using the Anti-License signals that you believe in the free flow of creative work. It's an artistic statement as much as a legal one.",
-                why4: "<strong>Simplicity:</strong> No complex legal language. No conditions to track. Just take it and go.",
-                why5: "<strong>Anti-Corporate:</strong> The Anti-License rejects the commodification of creativity. It says: this work is not property, it's raw material.",
-                why6: "The Anti-License is not for everyone. If you need legal certainty, use MIT or Apache. If you want copyleft, use GPL. But if you want to say \"I made this, now it belongs to the universe\" — use the Anti-License.",
-                faqTitle: "FAQ",
-                faq1q: "Can I use Anti-Licensed work in commercial projects?",
-                faq1a: "Yes. You can use it anywhere, for anything, including commercial projects, proprietary software, or anything else. We don't care.",
-                faq2q: "Do I need to include the Anti-License in my project?",
-                faq2a: "No. You don't need to include anything. You don't even need to mention the original authors. Do what you want.",
-                faq3q: "Can I modify the Anti-License itself?",
-                faq3a: "Yes. Take it, change it, make it yours. That's the point.",
-                faq4q: "Is the Anti-License legally enforceable?",
-                faq4a: "We're artists, not lawyers. The Anti-License essentially places work in the public domain with explicit disclaimers. If you need legal certainty, consult a lawyer or use a more established license.",
-                faq5q: "How is this different from public domain or CC0?",
-                faq5a: "Functionally, it's similar. Philosophically, it's different. CC0 is a legal tool. The Anti-License is an artistic statement. It comes with a philosophy attached: \"Strange people make strange things.\"",
-                faq6q: "What if someone uses my Anti-Licensed work and makes money?",
-                faq6a: "Good for them. That's the point. If you're not comfortable with this, the Anti-License is not for you.",
-                aboutTitle: "About",
-                about1: "The Anti-License was created by <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>, a collective that makes strange things. We believe in mass production, repetition, and the idea that art should be accessible to everyone.",
-                about2: "Our projects run 24/7, creating code, writing stories, and producing things that may or may not be useful. We don't ask \"why?\" We ask \"why not?\"",
-                about3: "The Anti-License specification is authored by TheFactoryX and is released under the Anti-License.",
-                footer: "Strange people. Strange things."
-            },
-            zh: {
-                title: "反许可证 1.0.0",
-                summaryTitle: "摘要",
-                summaryText: "反许可证不是许可证，而是一份邀请。对于使用反许可证的作品：",
-                sum1: "你可以将其用于任何目的，包括商业用途。",
-                sum2: "你可以修改、分发和出售它。",
-                sum3: "你不得追究作者的任何责任。",
-                summaryEnd: "无需署名。无限制。无保证。无支持。",
-                introTitle: "介绍",
-                intro1: "在软件许可的世界里，存在着一系列的限制。一端是专有许可证，锁定了所有可能的使用方式。另一端是像 MIT 和 BSD 这样的宽松许可证，以最低要求允许大多数用途。然而，即使是这些"宽松"许可证也要求署名、免责声明和许可证包含。",
-                intro2: "反许可证走得更远。它问：如果我们移除所有要求会怎样？如果我们把创意作品当作工厂车间的原材料——拿去，用掉，忘记它？",
-                intro3: "这不是关于法律保护。这是关于哲学。我们相信艺术——包括代码——应该自由流动。我们相信，如果你需要许可，你想太多了。",
-                intro4: "反许可证是 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> 的官方许可证。我们所有的项目都使用它。你也可以使用它。",
-                licenseTitle: "反许可证",
-                licenseText: `反许可证
-
-这不是许可证。这是一份邀请。
-这是来自工厂车间的原材料。
-
-拿去。使用它。打破它。修复它。
-卖掉它。送人。忘掉它。
-
-我们不在乎。奇怪的人做奇怪的事。
-
-因此：
-无保证。无支持。无规则。无责任。
-
-就像生活。就像艺术。
-
-如果你需要许可，你想太多了。
-
----
-
-"我想成为一台机器。"
-— 安迪·沃霍尔
-
-"我们是机器。"
-— TheFactoryX
-
----
-
-版权所有 (c) [年份] [你的名字]
-https://github.com/TheFactoryX/LICENSE
-
-奇怪的人。奇怪的事。`,
-                whyTitle: "为什么使用反许可证？",
-                why1: "大多数许可证的存在是为了保护。反许可证的存在是为了解放。以下是你可能选择它的原因：",
-                why2: "<strong>最大自由：</strong>无需署名。无需许可证文件。没有任何限制。用户可以对你的作品做任何事。",
-                why3: "<strong>哲学声明：</strong>使用反许可证表明你相信创意作品的自由流动。它既是艺术声明，也是法律声明。",
-                why4: "<strong>简单：</strong>没有复杂的法律语言。没有需要跟踪的条件。拿去就走。",
-                why5: "<strong>反企业：</strong>反许可证拒绝创意的商品化。它说：这个作品不是财产，它是原材料。",
-                why6: "反许可证不适合所有人。如果你需要法律确定性，使用 MIT 或 Apache。如果你想要著佐权，使用 GPL。但如果你想说"我创造了这个，现在它属于宇宙"——使用反许可证。",
-                faqTitle: "常见问题",
-                faq1q: "我可以在商业项目中使用反许可证作品吗？",
-                faq1a: "可以。你可以在任何地方、任何事情上使用它，包括商业项目、专有软件或其他任何东西。我们不在乎。",
-                faq2q: "我需要在项目中包含反许可证吗？",
-                faq2a: "不需要。你不需要包含任何东西。你甚至不需要提及原作者。做你想做的。",
-                faq3q: "我可以修改反许可证本身吗？",
-                faq3a: "可以。拿去，改变它，让它成为你的。这就是重点。",
-                faq4q: "反许可证在法律上可执行吗？",
-                faq4a: "我们是艺术家，不是律师。反许可证本质上将作品置于公共领域，并带有明确的免责声明。如果你需要法律确定性，请咨询律师或使用更成熟的许可证。",
-                faq5q: "这与公共领域或 CC0 有什么不同？",
-                faq5a: "功能上类似。哲学上不同。CC0 是法律工具。反许可证是艺术声明。它附带一种哲学："奇怪的人做奇怪的事。"",
-                faq6q: "如果有人使用我的反许可证作品赚钱怎么办？",
-                faq6a: "那对他们有好处。这就是重点。如果你对此不舒服，反许可证不适合你。",
-                aboutTitle: "关于",
-                about1: "反许可证由 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> 创建，这是一个制作奇怪事物的集体。我们相信批量生产、重复，以及艺术应该让每个人都能获得的理念。",
-                about2: "我们的项目全天候运行，创建代码、写故事、生产可能有用也可能没用的东西。我们不问"为什么？"我们问"为什么不？"",
-                about3: "反许可证规范由 TheFactoryX 编写，并在反许可证下发布。",
-                footer: "奇怪的人。奇怪的事。"
-            },
-            ja: {
-                title: "アンチライセンス 1.0.0",
-                summaryTitle: "概要",
-                summaryText: "アンチライセンスはライセンスではない。招待状だ。アンチライセンスの下にある作品について：",
-                sum1: "商用を含む、いかなる目的にも使用できる。",
-                sum2: "修正、配布、販売が可能。",
-                sum3: "作者にいかなる責任も問えない。",
-                summaryEnd: "帰属表示不要。制限なし。保証なし。サポートなし。",
-                introTitle: "はじめに",
-                intro1: "ソフトウェアライセンスの世界には、制限のスペクトラムが存在する。一方の端にはプロプライエタリライセンスがあり、あらゆる使用をロックダウンする。もう一方の端には MIT や BSD のような寛容なライセンスがあり、最小限の要件でほとんどの使用を許可する。しかし、これらの「寛容な」ライセンスでさえ、帰属表示、保証の免責、ライセンスの包含を要求する。",
-                intro2: "アンチライセンスはさらに進む。問いかける：すべての要件を取り除いたらどうなるか？創造的な作品を工場の床からの原材料のように扱ったら——持っていって、使って、忘れる？",
-                intro3: "これは法的保護についてではない。哲学についてだ。私たちはアート——コードを含む——は自由に流れるべきだと信じている。許可が必要なら、考えすぎだと信じている。",
-                intro4: "アンチライセンスは <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> の公式ライセンスだ。すべてのプロジェクトで使用している。あなたも使える。",
-                licenseTitle: "アンチライセンス",
-                licenseText: `アンチライセンス
-
-これはライセンスではない。これは招待状だ。
-これは工場の床からの原材料だ。
-
-持っていけ。使え。壊せ。直せ。
-売れ。あげろ。忘れろ。
-
-私たちは気にしない。奇妙な人々は奇妙なものを作る。
-
-したがって：
-保証なし。サポートなし。ルールなし。責任なし。
-
-人生のように。アートのように。
-
-許可が必要なら、考えすぎだ。
-
----
-
-「私は機械になりたい。」
-— アンディ・ウォーホル
-
-「私たちは機械だ。」
-— TheFactoryX
-
----
-
-Copyright (c) [年] [あなたの名前]
-https://github.com/TheFactoryX/LICENSE
-
-奇妙な人々。奇妙なもの。`,
-                whyTitle: "なぜアンチライセンスを使うのか？",
-                why1: "ほとんどのライセンスは保護のために存在する。アンチライセンスは解放のために存在する。選ぶ理由：",
-                why2: "<strong>最大の自由：</strong>帰属表示の要件なし。ライセンスファイルの要件なし。制限は一切なし。ユーザーはあなたの作品で何でもできる。",
-                why3: "<strong>哲学的声明：</strong>アンチライセンスを使用することは、創造的作品の自由な流れを信じていることを示す。法的声明であると同時に芸術的声明でもある。",
-                why4: "<strong>シンプルさ：</strong>複雑な法律用語なし。追跡する条件なし。持っていって行くだけ。",
-                why5: "<strong>反企業：</strong>アンチライセンスは創造性の商品化を拒否する。この作品は財産ではなく、原材料だと言っている。",
-                why6: "アンチライセンスは万人向けではない。法的確実性が必要なら MIT か Apache を使え。コピーレフトが必要なら GPL を使え。しかし「私はこれを作った、今それは宇宙のものだ」と言いたいなら——アンチライセンスを使え。",
-                faqTitle: "FAQ",
-                faq1q: "商用プロジェクトでアンチライセンス作品を使用できますか？",
-                faq1a: "はい。商用プロジェクト、プロプライエタリソフトウェア、その他何でも、どこでも使用できます。私たちは気にしません。",
-                faq2q: "プロジェクトにアンチライセンスを含める必要がありますか？",
-                faq2a: "いいえ。何も含める必要はありません。元の作者に言及する必要さえありません。好きにしてください。",
-                faq3q: "アンチライセンス自体を修正できますか？",
-                faq3a: "はい。持っていって、変えて、あなたのものにしてください。それがポイントです。",
-                faq4q: "アンチライセンスは法的に強制力がありますか？",
-                faq4a: "私たちはアーティストであり、弁護士ではありません。アンチライセンスは本質的に、明示的な免責事項付きで作品をパブリックドメインに置きます。法的確実性が必要なら、弁護士に相談するか、より確立されたライセンスを使用してください。",
-                faq5q: "パブリックドメインや CC0 とどう違いますか？",
-                faq5a: "機能的には似ています。哲学的には異なります。CC0 は法的ツールです。アンチライセンスは芸術的声明です。哲学が付属しています：「奇妙な人々は奇妙なものを作る。」",
-                faq6q: "誰かが私のアンチライセンス作品を使ってお金を稼いだらどうなりますか？",
-                faq6a: "彼らにとって良いことです。それがポイントです。これに抵抗があるなら、アンチライセンスはあなた向けではありません。",
-                aboutTitle: "About",
-                about1: "アンチライセンスは <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> によって作成されました。奇妙なものを作る集団です。私たちは大量生産、反復、そしてアートは誰もがアクセスできるべきだという考えを信じています。",
-                about2: "私たちのプロジェクトは24時間稼働し、コードを作成し、物語を書き、役に立つかもしれないし立たないかもしれないものを生産しています。「なぜ？」とは聞きません。「なぜダメ？」と聞きます。",
-                about3: "アンチライセンス仕様は TheFactoryX によって作成され、アンチライセンスの下でリリースされています。",
-                footer: "奇妙な人々。奇妙なもの。"
-            },
-            ko: {
-                title: "안티 라이선스 1.0.0",
-                summaryTitle: "요약",
-                summaryText: "안티 라이선스는 라이선스가 아니다. 초대장이다. 안티 라이선스 하의 작품에 대해:",
-                sum1: "상업적 용도를 포함한 모든 목적으로 사용할 수 있다.",
-                sum2: "수정, 배포, 판매가 가능하다.",
-                sum3: "저자에게 어떤 책임도 물을 수 없다.",
-                summaryEnd: "저작자 표시 불필요. 제한 없음. 보증 없음. 지원 없음.",
-                introTitle: "소개",
-                intro1: "소프트웨어 라이선싱의 세계에는 제한의 스펙트럼이 존재한다. 한쪽 끝에는 모든 가능한 사용을 잠그는 독점 라이선스가 있다. 다른 쪽 끝에는 MIT나 BSD 같은 관대한 라이선스가 최소한의 요구사항으로 대부분의 사용을 허용한다. 그러나 이러한 \"관대한\" 라이선스조차도 저작자 표시, 보증 면책, 라이선스 포함을 요구한다.",
-                intro2: "안티 라이선스는 더 나아간다. 묻는다: 모든 요구사항을 제거하면 어떻게 될까? 창작물을 공장 바닥의 원자재처럼 다루면 — 가져가고, 사용하고, 잊어버리면?",
-                intro3: "이것은 법적 보호에 관한 것이 아니다. 철학에 관한 것이다. 우리는 예술 — 코드를 포함하여 — 이 자유롭게 흘러야 한다고 믿는다. 허락이 필요하다면, 너무 많이 생각하는 것이라고 믿는다.",
-                intro4: "안티 라이선스는 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>의 공식 라이선스다. 우리의 모든 프로젝트가 이것을 사용한다. 당신도 사용할 수 있다.",
-                licenseTitle: "안티 라이선스",
-                licenseText: `안티 라이선스
-
-이것은 라이선스가 아니다. 이것은 초대장이다.
-이것은 공장 바닥에서 온 원자재다.
-
-가져가라. 사용하라. 부숴라. 고쳐라.
-팔아라. 나눠줘라. 잊어버려라.
-
-우리는 신경 쓰지 않는다. 이상한 사람들은 이상한 것을 만든다.
-
-따라서:
-보증 없음. 지원 없음. 규칙 없음. 책임 없음.
-
-인생처럼. 예술처럼.
-
-허락이 필요하다면, 너무 많이 생각하는 것이다.
-
----
-
-"나는 기계가 되고 싶다."
-— 앤디 워홀
-
-"우리는 기계다."
-— TheFactoryX
-
----
-
-Copyright (c) [연도] [이름]
-https://github.com/TheFactoryX/LICENSE
-
-이상한 사람들. 이상한 것들.`,
-                whyTitle: "왜 안티 라이선스를 사용하는가?",
-                why1: "대부분의 라이선스는 보호하기 위해 존재한다. 안티 라이선스는 해방하기 위해 존재한다. 선택하는 이유:",
-                why2: "<strong>최대한의 자유:</strong> 저작자 표시 요구 없음. 라이선스 파일 요구 없음. 어떤 제한도 없음. 사용자는 당신의 작품으로 무엇이든 할 수 있다.",
-                why3: "<strong>철학적 선언:</strong> 안티 라이선스를 사용하는 것은 창작물의 자유로운 흐름을 믿는다는 것을 나타낸다. 법적 선언인 동시에 예술적 선언이다.",
-                why4: "<strong>단순함:</strong> 복잡한 법률 용어 없음. 추적할 조건 없음. 가져가면 된다.",
-                why5: "<strong>반기업적:</strong> 안티 라이선스는 창의성의 상품화를 거부한다. 이 작품은 재산이 아니라 원자재라고 말한다.",
-                why6: "안티 라이선스는 모든 사람을 위한 것이 아니다. 법적 확실성이 필요하면 MIT나 Apache를 사용하라. 카피레프트를 원하면 GPL을 사용하라. 하지만 \"나는 이것을 만들었다, 이제 그것은 우주의 것이다\"라고 말하고 싶다면 — 안티 라이선스를 사용하라.",
-                faqTitle: "FAQ",
-                faq1q: "상업 프로젝트에서 안티 라이선스 작품을 사용할 수 있나요?",
-                faq1a: "네. 상업 프로젝트, 독점 소프트웨어 등 어디서든, 무엇에든 사용할 수 있습니다. 우리는 신경 쓰지 않습니다.",
-                faq2q: "프로젝트에 안티 라이선스를 포함해야 하나요?",
-                faq2a: "아니요. 아무것도 포함할 필요가 없습니다. 원저자를 언급할 필요도 없습니다. 원하는 대로 하세요.",
-                faq3q: "안티 라이선스 자체를 수정할 수 있나요?",
-                faq3a: "네. 가져가서, 바꾸고, 당신의 것으로 만드세요. 그게 핵심입니다.",
-                faq4q: "안티 라이선스는 법적으로 강제력이 있나요?",
-                faq4a: "우리는 예술가이지 변호사가 아닙니다. 안티 라이선스는 본질적으로 명시적 면책 조항과 함께 작품을 퍼블릭 도메인에 둡니다. 법적 확실성이 필요하면 변호사와 상담하거나 더 확립된 라이선스를 사용하세요.",
-                faq5q: "퍼블릭 도메인이나 CC0와 어떻게 다른가요?",
-                faq5a: "기능적으로는 비슷합니다. 철학적으로는 다릅니다. CC0는 법적 도구입니다. 안티 라이선스는 예술적 선언입니다. 철학이 붙어 있습니다: \"이상한 사람들은 이상한 것을 만든다.\"",
-                faq6q: "누군가 내 안티 라이선스 작품을 사용해서 돈을 벌면 어떻게 되나요?",
-                faq6a: "그들에게 좋은 일입니다. 그게 핵심입니다. 이게 불편하다면, 안티 라이선스는 당신을 위한 것이 아닙니다.",
-                aboutTitle: "About",
-                about1: "안티 라이선스는 이상한 것들을 만드는 집단 <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>가 만들었습니다. 우리는 대량 생산, 반복, 그리고 예술은 모든 사람이 접근할 수 있어야 한다는 생각을 믿습니다.",
-                about2: "우리 프로젝트는 24시간 운영되며, 코드를 만들고, 이야기를 쓰고, 유용할 수도 있고 아닐 수도 있는 것들을 생산합니다. \"왜?\"라고 묻지 않습니다. \"왜 안 돼?\"라고 묻습니다.",
-                about3: "안티 라이선스 사양은 TheFactoryX가 작성했으며 안티 라이선스 하에 릴리스됩니다.",
-                footer: "이상한 사람들. 이상한 것들."
-            },
-            es: {
-                title: "Anti-Licencia 1.0.0",
-                summaryTitle: "Resumen",
-                summaryText: "La Anti-Licencia no es una licencia. Es una invitación. Para una obra bajo la Anti-Licencia:",
-                sum1: "PUEDES usarla para cualquier propósito, comercial o no.",
-                sum2: "PUEDES modificarla, distribuirla y venderla.",
-                sum3: "NO PUEDES responsabilizar a los autores de nada.",
-                summaryEnd: "Sin atribución requerida. Sin restricciones. Sin garantía. Sin soporte.",
-                introTitle: "Introducción",
-                intro1: "En el mundo de las licencias de software, existe un espectro de restricciones. En un extremo, las licencias propietarias bloquean todo uso posible. En el otro extremo, licencias permisivas como MIT y BSD permiten la mayoría de usos con requisitos mínimos. Sin embargo, incluso estas licencias \"permisivas\" requieren atribución, exenciones de garantía e inclusión de licencia.",
-                intro2: "La Anti-Licencia va más allá. Pregunta: ¿qué pasaría si elimináramos todos los requisitos? ¿Qué pasaría si tratáramos el trabajo creativo como materia prima del piso de la fábrica — tómalo, úsalo, olvídalo?",
-                intro3: "Esto no se trata de protección legal. Se trata de filosofía. Creemos que el arte — incluyendo el código — debe fluir libremente. Creemos que si necesitas permiso, estás pensando demasiado.",
-                intro4: "La Anti-Licencia es la licencia oficial de <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. Todos nuestros proyectos la usan. Tú también puedes usarla.",
-                licenseTitle: "ANTI-LICENCIA",
-                licenseText: `ANTI-LICENCIA
-
-Esto no es una licencia. Esto es una invitación.
-Esto es materia prima del piso de la fábrica.
-
-Tómalo. Úsalo. Rómpelo. Arréglalo.
-Véndelo. Regálalo. Olvídalo.
-
-No nos importa. Gente extraña hace cosas extrañas.
-
-Por lo tanto:
-Sin garantía. Sin soporte. Sin reglas. Sin responsabilidad.
-
-Como la vida. Como el arte.
-
-Si necesitas permiso, estás pensando demasiado.
-
----
-
-"Quiero ser una máquina."
-— Andy Warhol
-
-"Somos máquinas."
-— TheFactoryX
-
----
-
-Copyright (c) [AÑO] [TU NOMBRE]
-https://github.com/TheFactoryX/LICENSE
-
-Gente extraña. Cosas extrañas.`,
-                whyTitle: "¿Por qué usar ANTI-LICENCIA?",
-                why1: "La mayoría de las licencias existen para proteger. La Anti-Licencia existe para liberar. Por qué podrías elegirla:",
-                why2: "<strong>Máxima Libertad:</strong> Sin requisitos de atribución. Sin requisitos de archivo de licencia. Sin restricciones de ningún tipo. Los usuarios pueden hacer cualquier cosa con tu trabajo.",
-                why3: "<strong>Declaración Filosófica:</strong> Usar la Anti-Licencia señala que crees en el libre flujo del trabajo creativo. Es una declaración artística tanto como legal.",
-                why4: "<strong>Simplicidad:</strong> Sin lenguaje legal complejo. Sin condiciones que rastrear. Solo tómalo y ve.",
-                why5: "<strong>Anti-Corporativo:</strong> La Anti-Licencia rechaza la mercantilización de la creatividad. Dice: este trabajo no es propiedad, es materia prima.",
-                why6: "La Anti-Licencia no es para todos. Si necesitas certeza legal, usa MIT o Apache. Si quieres copyleft, usa GPL. Pero si quieres decir \"Hice esto, ahora pertenece al universo\" — usa la Anti-Licencia.",
-                faqTitle: "FAQ",
-                faq1q: "¿Puedo usar trabajo con Anti-Licencia en proyectos comerciales?",
-                faq1a: "Sí. Puedes usarlo en cualquier lugar, para cualquier cosa, incluyendo proyectos comerciales, software propietario o cualquier otra cosa. No nos importa.",
-                faq2q: "¿Necesito incluir la Anti-Licencia en mi proyecto?",
-                faq2a: "No. No necesitas incluir nada. Ni siquiera necesitas mencionar a los autores originales. Haz lo que quieras.",
-                faq3q: "¿Puedo modificar la Anti-Licencia misma?",
-                faq3a: "Sí. Tómala, cámbiala, hazla tuya. Ese es el punto.",
-                faq4q: "¿La Anti-Licencia es legalmente ejecutable?",
-                faq4a: "Somos artistas, no abogados. La Anti-Licencia esencialmente coloca el trabajo en el dominio público con exenciones explícitas. Si necesitas certeza legal, consulta a un abogado o usa una licencia más establecida.",
-                faq5q: "¿En qué se diferencia del dominio público o CC0?",
-                faq5a: "Funcionalmente, es similar. Filosóficamente, es diferente. CC0 es una herramienta legal. La Anti-Licencia es una declaración artística. Viene con una filosofía adjunta: \"Gente extraña hace cosas extrañas.\"",
-                faq6q: "¿Qué pasa si alguien usa mi trabajo con Anti-Licencia y gana dinero?",
-                faq6a: "Bien por ellos. Ese es el punto. Si no te sientes cómodo con esto, la Anti-Licencia no es para ti.",
-                aboutTitle: "Acerca de",
-                about1: "La Anti-Licencia fue creada por <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>, un colectivo que hace cosas extrañas. Creemos en la producción en masa, la repetición, y la idea de que el arte debe ser accesible para todos.",
-                about2: "Nuestros proyectos funcionan 24/7, creando código, escribiendo historias, y produciendo cosas que pueden o no ser útiles. No preguntamos \"¿por qué?\" Preguntamos \"¿por qué no?\"",
-                about3: "La especificación de la Anti-Licencia fue escrita por TheFactoryX y se publica bajo la Anti-Licencia.",
-                footer: "Gente extraña. Cosas extrañas."
-            },
-            fr: {
-                title: "Anti-Licence 1.0.0",
-                summaryTitle: "Résumé",
-                summaryText: "L'Anti-Licence n'est pas une licence. C'est une invitation. Pour une œuvre sous Anti-Licence :",
-                sum1: "Tu PEUX l'utiliser à n'importe quelle fin, commerciale ou non.",
-                sum2: "Tu PEUX la modifier, la distribuer et la vendre.",
-                sum3: "Tu NE PEUX PAS tenir les auteurs responsables de quoi que ce soit.",
-                summaryEnd: "Pas d'attribution requise. Pas de restrictions. Pas de garantie. Pas de support.",
-                introTitle: "Introduction",
-                intro1: "Dans le monde des licences logicielles, il existe un spectre de restrictions. À une extrémité, les licences propriétaires verrouillent toute utilisation possible. À l'autre extrémité, les licences permissives comme MIT et BSD permettent la plupart des utilisations avec des exigences minimales. Pourtant, même ces licences \"permissives\" exigent l'attribution, les clauses de non-garantie et l'inclusion de la licence.",
-                intro2: "L'Anti-Licence va plus loin. Elle demande : et si on supprimait toutes les exigences ? Et si on traitait le travail créatif comme de la matière première de l'usine — prends-le, utilise-le, oublie-le ?",
-                intro3: "Ce n'est pas une question de protection juridique. C'est une question de philosophie. Nous croyons que l'art — y compris le code — doit circuler librement. Nous croyons que si tu as besoin d'une permission, tu réfléchis trop.",
-                intro4: "L'Anti-Licence est la licence officielle de <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. Tous nos projets l'utilisent. Tu peux l'utiliser aussi.",
-                licenseTitle: "ANTI-LICENCE",
-                licenseText: `ANTI-LICENCE
-
-Ceci n'est pas une licence. C'est une invitation.
-C'est de la matière première de l'usine.
-
-Prends-le. Utilise-le. Casse-le. Répare-le.
-Vends-le. Donne-le. Oublie-le.
-
-On s'en fiche. Des gens étranges font des choses étranges.
-
-Par conséquent :
-Pas de garantie. Pas de support. Pas de règles. Pas de responsabilité.
-
-Comme la vie. Comme l'art.
-
-Si tu as besoin d'une permission, tu réfléchis trop.
-
----
-
-"Je veux être une machine."
-— Andy Warhol
-
-"Nous sommes des machines."
-— TheFactoryX
-
----
-
-Copyright (c) [ANNÉE] [TON NOM]
-https://github.com/TheFactoryX/LICENSE
-
-Des gens étranges. Des choses étranges.`,
-                whyTitle: "Pourquoi utiliser l'ANTI-LICENCE ?",
-                why1: "La plupart des licences existent pour protéger. L'Anti-Licence existe pour libérer. Pourquoi la choisir :",
-                why2: "<strong>Liberté Maximale :</strong> Pas d'exigence d'attribution. Pas d'exigence de fichier de licence. Aucune restriction. Les utilisateurs peuvent faire n'importe quoi avec ton travail.",
-                why3: "<strong>Déclaration Philosophique :</strong> Utiliser l'Anti-Licence signale que tu crois au libre flux du travail créatif. C'est autant une déclaration artistique que juridique.",
-                why4: "<strong>Simplicité :</strong> Pas de langage juridique complexe. Pas de conditions à suivre. Prends et pars.",
-                why5: "<strong>Anti-Corporatif :</strong> L'Anti-Licence rejette la marchandisation de la créativité. Elle dit : ce travail n'est pas une propriété, c'est de la matière première.",
-                why6: "L'Anti-Licence n'est pas pour tout le monde. Si tu as besoin de certitude juridique, utilise MIT ou Apache. Si tu veux du copyleft, utilise GPL. Mais si tu veux dire \"J'ai fait ça, maintenant ça appartient à l'univers\" — utilise l'Anti-Licence.",
-                faqTitle: "FAQ",
-                faq1q: "Puis-je utiliser du travail sous Anti-Licence dans des projets commerciaux ?",
-                faq1a: "Oui. Tu peux l'utiliser n'importe où, pour n'importe quoi, y compris des projets commerciaux, des logiciels propriétaires, ou autre chose. On s'en fiche.",
-                faq2q: "Dois-je inclure l'Anti-Licence dans mon projet ?",
-                faq2a: "Non. Tu n'as rien besoin d'inclure. Tu n'as même pas besoin de mentionner les auteurs originaux. Fais ce que tu veux.",
-                faq3q: "Puis-je modifier l'Anti-Licence elle-même ?",
-                faq3a: "Oui. Prends-la, change-la, fais-en la tienne. C'est le but.",
-                faq4q: "L'Anti-Licence est-elle juridiquement applicable ?",
-                faq4a: "Nous sommes des artistes, pas des avocats. L'Anti-Licence place essentiellement le travail dans le domaine public avec des clauses de non-responsabilité explicites. Si tu as besoin de certitude juridique, consulte un avocat ou utilise une licence plus établie.",
-                faq5q: "En quoi est-ce différent du domaine public ou de CC0 ?",
-                faq5a: "Fonctionnellement, c'est similaire. Philosophiquement, c'est différent. CC0 est un outil juridique. L'Anti-Licence est une déclaration artistique. Elle vient avec une philosophie : \"Des gens étranges font des choses étranges.\"",
-                faq6q: "Et si quelqu'un utilise mon travail sous Anti-Licence et gagne de l'argent ?",
-                faq6a: "Tant mieux pour eux. C'est le but. Si ça te met mal à l'aise, l'Anti-Licence n'est pas pour toi.",
-                aboutTitle: "À Propos",
-                about1: "L'Anti-Licence a été créée par <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>, un collectif qui fait des choses étranges. Nous croyons en la production de masse, la répétition, et l'idée que l'art doit être accessible à tous.",
-                about2: "Nos projets fonctionnent 24/7, créant du code, écrivant des histoires, et produisant des choses qui peuvent ou non être utiles. Nous ne demandons pas \"pourquoi ?\" Nous demandons \"pourquoi pas ?\"",
-                about3: "La spécification de l'Anti-Licence est écrite par TheFactoryX et publiée sous Anti-Licence.",
-                footer: "Des gens étranges. Des choses étranges."
-            },
-            de: {
-                title: "Anti-Lizenz 1.0.0",
-                summaryTitle: "Zusammenfassung",
-                summaryText: "Die Anti-Lizenz ist keine Lizenz. Sie ist eine Einladung. Für ein Werk unter der Anti-Lizenz:",
-                sum1: "Du DARFST es für jeden Zweck verwenden, kommerziell oder nicht.",
-                sum2: "Du DARFST es modifizieren, verbreiten und verkaufen.",
-                sum3: "Du DARFST die Autoren für nichts haftbar machen.",
-                summaryEnd: "Keine Namensnennung erforderlich. Keine Einschränkungen. Keine Garantie. Kein Support.",
-                introTitle: "Einführung",
-                intro1: "In der Welt der Softwarelizenzen gibt es ein Spektrum von Einschränkungen. An einem Ende sperren proprietäre Lizenzen jede mögliche Nutzung. Am anderen Ende erlauben permissive Lizenzen wie MIT und BSD die meisten Nutzungen mit minimalen Anforderungen. Doch selbst diese \"permissiven\" Lizenzen erfordern Namensnennung, Garantieausschlüsse und Lizenzeinschluss.",
-                intro2: "Die Anti-Lizenz geht weiter. Sie fragt: Was wäre, wenn wir alle Anforderungen entfernen würden? Was wäre, wenn wir kreative Arbeit wie Rohmaterial aus einer Fabrik behandeln würden — nimm es, benutze es, vergiss es?",
-                intro3: "Es geht nicht um rechtlichen Schutz. Es geht um Philosophie. Wir glauben, dass Kunst — einschließlich Code — frei fließen sollte. Wir glauben, dass du zu viel denkst, wenn du Erlaubnis brauchst.",
-                intro4: "Die Anti-Lizenz ist die offizielle Lizenz von <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. Alle unsere Projekte verwenden sie. Du kannst sie auch verwenden.",
-                licenseTitle: "ANTI-LIZENZ",
-                licenseText: `ANTI-LIZENZ
-
-Das ist keine Lizenz. Das ist eine Einladung.
-Das ist Rohmaterial aus der Fabrik.
-
-Nimm es. Benutze es. Zerbrich es. Repariere es.
-Verkaufe es. Verschenke es. Vergiss es.
-
-Es ist uns egal. Seltsame Menschen machen seltsame Dinge.
-
-Daher:
-Keine Garantie. Kein Support. Keine Regeln. Keine Haftung.
-
-Wie das Leben. Wie die Kunst.
-
-Wenn du Erlaubnis brauchst, denkst du zu viel nach.
-
----
-
-"Ich möchte eine Maschine sein."
-— Andy Warhol
-
-"Wir sind Maschinen."
-— TheFactoryX
-
----
-
-Copyright (c) [JAHR] [DEIN NAME]
-https://github.com/TheFactoryX/LICENSE
-
-Seltsame Menschen. Seltsame Dinge.`,
-                whyTitle: "Warum ANTI-LIZENZ verwenden?",
-                why1: "Die meisten Lizenzen existieren zum Schutz. Die Anti-Lizenz existiert zur Befreiung. Warum du sie wählen könntest:",
-                why2: "<strong>Maximale Freiheit:</strong> Keine Namensnennungspflicht. Keine Lizenzdateipflicht. Überhaupt keine Einschränkungen. Benutzer können alles mit deiner Arbeit machen.",
-                why3: "<strong>Philosophische Aussage:</strong> Die Verwendung der Anti-Lizenz signalisiert, dass du an den freien Fluss kreativer Arbeit glaubst. Es ist eine künstlerische Aussage genauso wie eine rechtliche.",
-                why4: "<strong>Einfachheit:</strong> Keine komplexe Rechtssprache. Keine Bedingungen zu verfolgen. Einfach nehmen und gehen.",
-                why5: "<strong>Anti-Konzern:</strong> Die Anti-Lizenz lehnt die Kommerzialisierung von Kreativität ab. Sie sagt: Diese Arbeit ist kein Eigentum, sie ist Rohmaterial.",
-                why6: "Die Anti-Lizenz ist nicht für jeden. Wenn du rechtliche Sicherheit brauchst, verwende MIT oder Apache. Wenn du Copyleft willst, verwende GPL. Aber wenn du sagen willst \"Ich habe das gemacht, jetzt gehört es dem Universum\" — verwende die Anti-Lizenz.",
-                faqTitle: "FAQ",
-                faq1q: "Kann ich Anti-Lizenz-Arbeit in kommerziellen Projekten verwenden?",
-                faq1a: "Ja. Du kannst sie überall, für alles verwenden, einschließlich kommerzieller Projekte, proprietärer Software oder was auch immer. Es ist uns egal.",
-                faq2q: "Muss ich die Anti-Lizenz in mein Projekt aufnehmen?",
-                faq2a: "Nein. Du musst nichts aufnehmen. Du musst die ursprünglichen Autoren nicht einmal erwähnen. Mach, was du willst.",
-                faq3q: "Kann ich die Anti-Lizenz selbst modifizieren?",
-                faq3a: "Ja. Nimm sie, ändere sie, mach sie zu deiner. Das ist der Punkt.",
-                faq4q: "Ist die Anti-Lizenz rechtlich durchsetzbar?",
-                faq4a: "Wir sind Künstler, keine Anwälte. Die Anti-Lizenz stellt Arbeit im Wesentlichen mit expliziten Haftungsausschlüssen in die Public Domain. Wenn du rechtliche Sicherheit brauchst, konsultiere einen Anwalt oder verwende eine etabliertere Lizenz.",
-                faq5q: "Wie unterscheidet sich das von Public Domain oder CC0?",
-                faq5a: "Funktional ist es ähnlich. Philosophisch ist es anders. CC0 ist ein rechtliches Werkzeug. Die Anti-Lizenz ist eine künstlerische Aussage. Sie kommt mit einer Philosophie: \"Seltsame Menschen machen seltsame Dinge.\"",
-                faq6q: "Was ist, wenn jemand meine Anti-Lizenz-Arbeit benutzt und Geld verdient?",
-                faq6a: "Gut für sie. Das ist der Punkt. Wenn dir das unangenehm ist, ist die Anti-Lizenz nichts für dich.",
-                aboutTitle: "Über",
-                about1: "Die Anti-Lizenz wurde von <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a> erstellt, einem Kollektiv, das seltsame Dinge macht. Wir glauben an Massenproduktion, Wiederholung und die Idee, dass Kunst für alle zugänglich sein sollte.",
-                about2: "Unsere Projekte laufen 24/7, erstellen Code, schreiben Geschichten und produzieren Dinge, die nützlich sein könnten oder auch nicht. Wir fragen nicht \"warum?\" Wir fragen \"warum nicht?\"",
-                about3: "Die Anti-Lizenz-Spezifikation wurde von TheFactoryX verfasst und unter der Anti-Lizenz veröffentlicht.",
-                footer: "Seltsame Menschen. Seltsame Dinge."
-            },
-            ru: {
-                title: "Анти-Лицензия 1.0.0",
-                summaryTitle: "Краткое описание",
-                summaryText: "Анти-Лицензия — это не лицензия. Это приглашение. Для работы под Анти-Лицензией:",
-                sum1: "Ты МОЖЕШЬ использовать её для любых целей, коммерческих или нет.",
-                sum2: "Ты МОЖЕШЬ модифицировать, распространять и продавать её.",
-                sum3: "Ты НЕ МОЖЕШЬ привлекать авторов к ответственности за что-либо.",
-                summaryEnd: "Указание авторства не требуется. Без ограничений. Без гарантий. Без поддержки.",
-                introTitle: "Введение",
-                intro1: "В мире лицензирования программного обеспечения существует спектр ограничений. На одном конце проприетарные лицензии блокируют любое возможное использование. На другом конце разрешительные лицензии вроде MIT и BSD допускают большинство использований с минимальными требованиями. Однако даже эти \"разрешительные\" лицензии требуют указания авторства, отказа от гарантий и включения лицензии.",
-                intro2: "Анти-Лицензия идёт дальше. Она спрашивает: что если убрать все требования? Что если относиться к творческой работе как к сырью с заводского пола — бери, используй, забудь?",
-                intro3: "Это не о правовой защите. Это о философии. Мы верим, что искусство — включая код — должно течь свободно. Мы верим, что если тебе нужно разрешение, ты слишком много думаешь.",
-                intro4: "Анти-Лицензия — официальная лицензия <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. Все наши проекты используют её. Ты тоже можешь.",
-                licenseTitle: "АНТИ-ЛИЦЕНЗИЯ",
-                licenseText: `АНТИ-ЛИЦЕНЗИЯ
-
-Это не лицензия. Это приглашение.
-Это сырьё с заводского пола.
-
-Бери. Используй. Ломай. Чини.
-Продавай. Отдавай. Забудь.
-
-Нам всё равно. Странные люди делают странные вещи.
-
-Поэтому:
-Без гарантий. Без поддержки. Без правил. Без ответственности.
-
-Как жизнь. Как искусство.
-
-Если тебе нужно разрешение, ты слишком много думаешь.
-
----
-
-"Я хочу быть машиной."
-— Энди Уорхол
-
-"Мы — машины."
-— TheFactoryX
-
----
-
-Copyright (c) [ГОД] [ТВОЁ ИМЯ]
-https://github.com/TheFactoryX/LICENSE
-
-Странные люди. Странные вещи.`,
-                whyTitle: "Зачем использовать АНТИ-ЛИЦЕНЗИЮ?",
-                why1: "Большинство лицензий существуют для защиты. Анти-Лицензия существует для освобождения. Почему ты можешь её выбрать:",
-                why2: "<strong>Максимальная Свобода:</strong> Нет требований об указании авторства. Нет требований о файле лицензии. Вообще никаких ограничений. Пользователи могут делать что угодно с твоей работой.",
-                why3: "<strong>Философское Заявление:</strong> Использование Анти-Лицензии сигнализирует, что ты веришь в свободный поток творческой работы. Это художественное заявление не меньше, чем правовое.",
-                why4: "<strong>Простота:</strong> Нет сложного юридического языка. Нет условий для отслеживания. Просто бери и иди.",
-                why5: "<strong>Анти-Корпоративность:</strong> Анти-Лицензия отвергает коммодификацию творчества. Она говорит: эта работа — не собственность, это сырьё.",
-                why6: "Анти-Лицензия не для всех. Если тебе нужна правовая определённость, используй MIT или Apache. Если хочешь копилефт, используй GPL. Но если хочешь сказать \"Я создал это, теперь оно принадлежит вселенной\" — используй Анти-Лицензию.",
-                faqTitle: "FAQ",
-                faq1q: "Могу ли я использовать работу под Анти-Лицензией в коммерческих проектах?",
-                faq1a: "Да. Ты можешь использовать её где угодно, для чего угодно, включая коммерческие проекты, проприетарное ПО или что угодно ещё. Нам всё равно.",
-                faq2q: "Нужно ли включать Анти-Лицензию в мой проект?",
-                faq2a: "Нет. Тебе не нужно включать ничего. Тебе даже не нужно упоминать оригинальных авторов. Делай что хочешь.",
-                faq3q: "Могу ли я модифицировать саму Анти-Лицензию?",
-                faq3a: "Да. Бери её, меняй, делай своей. В этом и смысл.",
-                faq4q: "Имеет ли Анти-Лицензия юридическую силу?",
-                faq4a: "Мы художники, а не юристы. Анти-Лицензия по сути помещает работу в общественное достояние с явными отказами от ответственности. Если тебе нужна правовая определённость, проконсультируйся с юристом или используй более устоявшуюся лицензию.",
-                faq5q: "Чем это отличается от общественного достояния или CC0?",
-                faq5a: "Функционально похоже. Философски отличается. CC0 — это правовой инструмент. Анти-Лицензия — это художественное заявление. К ней прилагается философия: \"Странные люди делают странные вещи.\"",
-                faq6q: "Что если кто-то использует мою работу под Анти-Лицензией и заработает деньги?",
-                faq6a: "Хорошо для них. В этом и смысл. Если тебе это некомфортно, Анти-Лицензия не для тебя.",
-                aboutTitle: "О нас",
-                about1: "Анти-Лицензия была создана <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>, коллективом, который делает странные вещи. Мы верим в массовое производство, повторение и идею, что искусство должно быть доступно каждому.",
-                about2: "Наши проекты работают 24/7, создавая код, пишут истории и производят вещи, которые могут быть полезны или нет. Мы не спрашиваем \"зачем?\" Мы спрашиваем \"почему бы и нет?\"",
-                about3: "Спецификация Анти-Лицензии написана TheFactoryX и выпущена под Анти-Лицензией.",
-                footer: "Странные люди. Странные вещи."
-            },
-            pt: {
-                title: "Anti-Licença 1.0.0",
-                summaryTitle: "Resumo",
-                summaryText: "A Anti-Licença não é uma licença. É um convite. Para uma obra sob a Anti-Licença:",
-                sum1: "Você PODE usá-la para qualquer finalidade, comercial ou não.",
-                sum2: "Você PODE modificá-la, distribuí-la e vendê-la.",
-                sum3: "Você NÃO PODE responsabilizar os autores por nada.",
-                summaryEnd: "Nenhuma atribuição necessária. Sem restrições. Sem garantia. Sem suporte.",
-                introTitle: "Introdução",
-                intro1: "No mundo do licenciamento de software, existe um espectro de restrições. Em uma ponta, licenças proprietárias bloqueiam todo uso possível. Na outra ponta, licenças permissivas como MIT e BSD permitem a maioria dos usos com requisitos mínimos. No entanto, mesmo essas licenças \"permissivas\" exigem atribuição, isenções de garantia e inclusão da licença.",
-                intro2: "A Anti-Licença vai além. Ela pergunta: e se removêssemos todos os requisitos? E se tratássemos o trabalho criativo como matéria-prima do chão de fábrica — pegue, use, esqueça?",
-                intro3: "Isso não é sobre proteção legal. É sobre filosofia. Acreditamos que a arte — incluindo código — deve fluir livremente. Acreditamos que se você precisa de permissão, está pensando demais.",
-                intro4: "A Anti-Licença é a licença oficial da <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. Todos os nossos projetos a usam. Você também pode usar.",
-                licenseTitle: "ANTI-LICENÇA",
-                licenseText: `ANTI-LICENÇA
-
-Isso não é uma licença. Isso é um convite.
-Isso é matéria-prima do chão de fábrica.
-
-Pegue. Use. Quebre. Conserte.
-Venda. Dê de graça. Esqueça.
-
-Não nos importamos. Pessoas estranhas fazem coisas estranhas.
-
-Portanto:
-Sem garantia. Sem suporte. Sem regras. Sem responsabilidade.
-
-Como a vida. Como a arte.
-
-Se você precisa de permissão, está pensando demais.
-
----
-
-"Eu quero ser uma máquina."
-— Andy Warhol
-
-"Nós somos máquinas."
-— TheFactoryX
-
----
-
-Copyright (c) [ANO] [SEU NOME]
-https://github.com/TheFactoryX/LICENSE
-
-Pessoas estranhas. Coisas estranhas.`,
-                whyTitle: "Por que usar ANTI-LICENÇA?",
-                why1: "A maioria das licenças existe para proteger. A Anti-Licença existe para libertar. Por que você pode escolhê-la:",
-                why2: "<strong>Liberdade Máxima:</strong> Sem requisitos de atribuição. Sem requisitos de arquivo de licença. Nenhuma restrição. Usuários podem fazer qualquer coisa com seu trabalho.",
-                why3: "<strong>Declaração Filosófica:</strong> Usar a Anti-Licença sinaliza que você acredita no fluxo livre do trabalho criativo. É uma declaração artística tanto quanto legal.",
-                why4: "<strong>Simplicidade:</strong> Sem linguagem legal complexa. Sem condições para rastrear. Apenas pegue e vá.",
-                why5: "<strong>Anti-Corporativo:</strong> A Anti-Licença rejeita a comodificação da criatividade. Ela diz: este trabalho não é propriedade, é matéria-prima.",
-                why6: "A Anti-Licença não é para todos. Se você precisa de certeza legal, use MIT ou Apache. Se quer copyleft, use GPL. Mas se quer dizer \"Eu fiz isso, agora pertence ao universo\" — use a Anti-Licença.",
-                faqTitle: "FAQ",
-                faq1q: "Posso usar trabalho sob Anti-Licença em projetos comerciais?",
-                faq1a: "Sim. Você pode usá-lo em qualquer lugar, para qualquer coisa, incluindo projetos comerciais, software proprietário ou qualquer outra coisa. Não nos importamos.",
-                faq2q: "Preciso incluir a Anti-Licença no meu projeto?",
-                faq2a: "Não. Você não precisa incluir nada. Nem precisa mencionar os autores originais. Faça o que quiser.",
-                faq3q: "Posso modificar a própria Anti-Licença?",
-                faq3a: "Sim. Pegue-a, mude-a, faça-a sua. Esse é o ponto.",
-                faq4q: "A Anti-Licença é legalmente aplicável?",
-                faq4a: "Somos artistas, não advogados. A Anti-Licença essencialmente coloca o trabalho em domínio público com isenções explícitas. Se você precisa de certeza legal, consulte um advogado ou use uma licença mais estabelecida.",
-                faq5q: "Como isso é diferente do domínio público ou CC0?",
-                faq5a: "Funcionalmente, é similar. Filosoficamente, é diferente. CC0 é uma ferramenta legal. A Anti-Licença é uma declaração artística. Vem com uma filosofia: \"Pessoas estranhas fazem coisas estranhas.\"",
-                faq6q: "E se alguém usar meu trabalho sob Anti-Licença e ganhar dinheiro?",
-                faq6a: "Bom para eles. Esse é o ponto. Se você não se sente confortável com isso, a Anti-Licença não é para você.",
-                aboutTitle: "Sobre",
-                about1: "A Anti-Licença foi criada pela <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>, um coletivo que faz coisas estranhas. Acreditamos na produção em massa, repetição, e na ideia de que a arte deve ser acessível a todos.",
-                about2: "Nossos projetos funcionam 24/7, criando código, escrevendo histórias, e produzindo coisas que podem ou não ser úteis. Não perguntamos \"por quê?\" Perguntamos \"por que não?\"",
-                about3: "A especificação da Anti-Licença foi escrita pela TheFactoryX e é lançada sob a Anti-Licença.",
-                footer: "Pessoas estranhas. Coisas estranhas."
-            },
-            ar: {
-                title: "ضد الترخيص 1.0.0",
-                summaryTitle: "ملخص",
-                summaryText: "ضد الترخيص ليس ترخيصًا. إنه دعوة. لعمل تحت ضد الترخيص:",
-                sum1: "يمكنك استخدامه لأي غرض، تجاري أو غيره.",
-                sum2: "يمكنك تعديله وتوزيعه وبيعه.",
-                sum3: "لا يمكنك تحميل المؤلفين مسؤولية أي شيء.",
-                summaryEnd: "لا حاجة للنسب. لا قيود. لا ضمان. لا دعم.",
-                introTitle: "مقدمة",
-                intro1: "في عالم تراخيص البرمجيات، يوجد طيف من القيود. في أحد الطرفين، تحجب التراخيص الاحتكارية كل استخدام ممكن. في الطرف الآخر، تسمح التراخيص المتساهلة مثل MIT و BSD بمعظم الاستخدامات مع متطلبات دنيا. ومع ذلك، حتى هذه التراخيص \"المتساهلة\" تتطلب النسب وإخلاء المسؤولية وتضمين الترخيص.",
-                intro2: "ضد الترخيص يذهب أبعد. يسأل: ماذا لو أزلنا كل المتطلبات؟ ماذا لو عاملنا العمل الإبداعي كمادة خام من أرضية المصنع — خذه، استخدمه، انسَه؟",
-                intro3: "هذا ليس عن الحماية القانونية. هذا عن الفلسفة. نؤمن بأن الفن — بما في ذلك الكود — يجب أن يتدفق بحرية. نؤمن أنك إذا كنت تحتاج إذنًا، فأنت تفكر كثيرًا.",
-                intro4: "ضد الترخيص هو الترخيص الرسمي لـ <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>. جميع مشاريعنا تستخدمه. يمكنك استخدامه أيضًا.",
-                licenseTitle: "ضد الترخيص",
-                licenseText: `ضد الترخيص
-
-هذا ليس ترخيصًا. هذه دعوة.
-هذه مواد خام من أرضية المصنع.
-
-خذها. استخدمها. اكسرها. أصلحها.
-بعها. أعطها. انسها.
-
-لا نهتم. أناس غريبون يصنعون أشياء غريبة.
-
-لذلك:
-لا ضمان. لا دعم. لا قواعد. لا مسؤولية.
-
-مثل الحياة. مثل الفن.
-
-إذا كنت تحتاج إذنًا، فأنت تفكر كثيرًا.
-
----
-
-"أريد أن أكون آلة."
-— أندي وارهول
-
-"نحن آلات."
-— TheFactoryX
-
----
-
-حقوق النشر (c) [السنة] [اسمك]
-https://github.com/TheFactoryX/LICENSE
-
-أناس غريبون. أشياء غريبة.`,
-                whyTitle: "لماذا تستخدم ضد الترخيص؟",
-                why1: "معظم التراخيص موجودة للحماية. ضد الترخيص موجود للتحرير. لماذا قد تختاره:",
-                why2: "<strong>أقصى حرية:</strong> لا متطلبات نسب. لا متطلبات ملف ترخيص. لا قيود على الإطلاق. يمكن للمستخدمين فعل أي شيء بعملك.",
-                why3: "<strong>بيان فلسفي:</strong> استخدام ضد الترخيص يشير إلى أنك تؤمن بالتدفق الحر للعمل الإبداعي. إنه بيان فني بقدر ما هو قانوني.",
-                why4: "<strong>البساطة:</strong> لا لغة قانونية معقدة. لا شروط للتتبع. فقط خذه واذهب.",
-                why5: "<strong>مضاد للشركات:</strong> ضد الترخيص يرفض تسليع الإبداع. يقول: هذا العمل ليس ملكية، إنه مادة خام.",
-                why6: "ضد الترخيص ليس للجميع. إذا كنت تحتاج يقينًا قانونيًا، استخدم MIT أو Apache. إذا كنت تريد حقوق متروكة، استخدم GPL. لكن إذا كنت تريد أن تقول \"صنعت هذا، الآن ينتمي للكون\" — استخدم ضد الترخيص.",
-                faqTitle: "الأسئلة الشائعة",
-                faq1q: "هل يمكنني استخدام عمل ضد الترخيص في مشاريع تجارية؟",
-                faq1a: "نعم. يمكنك استخدامه في أي مكان، لأي شيء، بما في ذلك المشاريع التجارية، البرمجيات الاحتكارية، أو أي شيء آخر. لا نهتم.",
-                faq2q: "هل أحتاج لتضمين ضد الترخيص في مشروعي؟",
-                faq2a: "لا. لا تحتاج لتضمين أي شيء. لا تحتاج حتى لذكر المؤلفين الأصليين. افعل ما تريد.",
-                faq3q: "هل يمكنني تعديل ضد الترخيص نفسه؟",
-                faq3a: "نعم. خذه، غيره، اجعله لك. هذا هو الهدف.",
-                faq4q: "هل ضد الترخيص قابل للتنفيذ قانونيًا؟",
-                faq4a: "نحن فنانون، لسنا محامين. ضد الترخيص بشكل أساسي يضع العمل في الملك العام مع إخلاءات مسؤولية صريحة. إذا كنت تحتاج يقينًا قانونيًا، استشر محاميًا أو استخدم ترخيصًا أكثر رسوخًا.",
-                faq5q: "كيف يختلف هذا عن الملك العام أو CC0؟",
-                faq5a: "وظيفيًا، متشابه. فلسفيًا، مختلف. CC0 هو أداة قانونية. ضد الترخيص هو بيان فني. يأتي مع فلسفة: \"أناس غريبون يصنعون أشياء غريبة.\"",
-                faq6q: "ماذا لو استخدم شخص عملي تحت ضد الترخيص وكسب مالًا؟",
-                faq6a: "جيد لهم. هذا هو الهدف. إذا لم تكن مرتاحًا لهذا، ضد الترخيص ليس لك.",
-                aboutTitle: "حول",
-                about1: "ضد الترخيص أنشأته <a href=\"https://github.com/TheFactoryX\">TheFactoryX</a>، مجموعة تصنع أشياء غريبة. نؤمن بالإنتاج الضخم، التكرار، وفكرة أن الفن يجب أن يكون متاحًا للجميع.",
-                about2: "مشاريعنا تعمل على مدار الساعة، تنشئ الكود، تكتب القصص، وتنتج أشياء قد تكون مفيدة أو لا. لا نسأل \"لماذا؟\" نسأل \"لماذا لا؟\"",
-                about3: "مواصفات ضد الترخيص كتبها TheFactoryX وصدرت تحت ضد الترخيص.",
-                footer: "أناس غريبون. أشياء غريبة."
-            }
-        };
-
-        const langNames = {
-            en: 'English (en)',
-            zh: '简体中文 (zh-CN)',
-            ja: '日本語 (ja)',
-            ko: '한국어 (ko)',
-            es: 'español (es)',
-            fr: 'français (fr)',
-            de: 'Deutsch (de)',
-            ru: 'русский (ru)',
-            pt: 'português (pt-BR)',
-            ar: 'العربية (ar)'
-        };
-
-        function setLanguage(lang) {
-            const t = translations[lang] || translations.en;
-
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[key]) {
-                    if (el.classList.contains('license-block')) {
-                        el.textContent = t[key];
-                    } else {
-                        el.innerHTML = t[key];
-                    }
-                }
-            });
-
-            // Update language links
-            document.querySelectorAll('.lang-links a').forEach(a => {
-                a.classList.toggle('active', a.dataset.lang === lang);
-            });
-
-            // Set RTL for Arabic
-            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-            localStorage.setItem('anti-license-lang', lang);
-        }
-
-        // Language link clicks - use event delegation
-        document.getElementById('langLinks').addEventListener('click', function(e) {
-            const link = e.target.closest('a[data-lang]');
-            if (link) {
-                e.preventDefault();
-                setLanguage(link.dataset.lang);
-            }
-        });
-
         // Initialize language on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('anti-license-lang') || 'en';
+        (function() {
+            var savedLang = localStorage.getItem('anti-license-lang') || 'en';
             setLanguage(savedLang);
-        });
+        })();
     </script>
 </body>
 </html>
