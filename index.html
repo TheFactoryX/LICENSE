@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-License</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #333333;
+            --text-muted: #666666;
+            --accent: #0099CC;
+            --accent-hover: #007399;
+            --border: #e0e0e0;
+            --code-bg: #f5f5f5;
+            --highlight: #FFB800;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --text: #e0e0e0;
+                --text-muted: #999999;
+                --accent: #00BFFF;
+                --accent-hover: #00DFFF;
+                --border: #333333;
+                --code-bg: #2a2a2a;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: var(--accent);
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            position: relative;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--text);
+            border-radius: 4px;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-top: 4px;
+            min-width: 150px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .lang-dropdown.active {
+            display: block;
+        }
+
+        .lang-option {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+
+        .lang-option:hover {
+            background: var(--code-bg);
+            color: var(--accent);
+        }
+
+        .lang-option.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .version {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 4px 12px;
+            background: var(--code-bg);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--highlight);
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 25px 0 10px;
+            color: var(--text);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Specification List */
+        .spec-list {
+            list-style: none;
+            counter-reset: spec;
+        }
+
+        .spec-list li {
+            counter-increment: spec;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .spec-list li::before {
+            content: counter(spec) ".";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: var(--code-bg);
+            border-left: 4px solid var(--highlight);
+            padding: 20px 25px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .quote-block .author {
+            margin-top: 10px;
+            font-style: normal;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 25px;
+        }
+
+        .faq-item h3 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            .spec-list li {
+                padding-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Anti-License</a>
+                <div class="lang-selector">
+                    <button class="lang-btn" id="langBtn">
+                        <span id="currentLang">English</span> ▾
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-option active" data-lang="en">English</button>
+                        <button class="lang-option" data-lang="zh">中文</button>
+                        <button class="lang-option" data-lang="ja">日本語</button>
+                        <button class="lang-option" data-lang="ko">한국어</button>
+                        <button class="lang-option" data-lang="es">Español</button>
+                        <button class="lang-option" data-lang="fr">Français</button>
+                        <button class="lang-option" data-lang="de">Deutsch</button>
+                        <button class="lang-option" data-lang="ru">Русский</button>
+                        <button class="lang-option" data-lang="pt">Português</button>
+                        <button class="lang-option" data-lang="ar">العربية</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1 data-i18n="title">Anti-License</h1>
+            <p class="tagline" data-i18n="tagline">"If you need permission, you're thinking too much."</p>
+            <span class="version">v1.0.0</span>
+        </section>
+
+        <main>
+            <section id="summary">
+                <h2 data-i18n="summaryTitle">Summary</h2>
+                <p data-i18n="summaryText">This is not a license. This is an invitation. This is raw material from the factory floor.</p>
+                <div class="code-block" data-i18n="summaryCode">Take it. Use it. Break it. Fix it.
+Sell it. Give it away. Forget about it.
+
+We don't care. Strange people make strange things.</div>
+            </section>
+
+            <section id="introduction">
+                <h2 data-i18n="introTitle">Introduction</h2>
+                <p data-i18n="introText1">In the world of software licensing, there are many choices: MIT, GPL, Apache, BSD. They all share one thing in common — they assume you need permission.</p>
+                <p data-i18n="introText2">The Anti-License takes a different approach. It assumes you don't need permission. It assumes you're an adult who can make your own decisions. It assumes that art — including code — should flow freely.</p>
+                <p data-i18n="introText3">This is the official license of TheFactoryX. All our projects use it. You can use it too.</p>
+            </section>
+
+            <section id="specification">
+                <h2 data-i18n="specTitle">Specification</h2>
+                <ol class="spec-list">
+                    <li data-i18n="spec1">You MAY use this work for any purpose.</li>
+                    <li data-i18n="spec2">You MAY modify this work in any way.</li>
+                    <li data-i18n="spec3">You MAY distribute this work, modified or unmodified.</li>
+                    <li data-i18n="spec4">You MAY sell this work or give it away for free.</li>
+                    <li data-i18n="spec5">You MAY use this work without attribution.</li>
+                    <li data-i18n="spec6">You MAY NOT hold the authors liable for anything.</li>
+                    <li data-i18n="spec7">You MAY NOT expect any warranty or support.</li>
+                    <li data-i18n="spec8">You MAY NOT claim the authors endorse your use.</li>
+                </ol>
+            </section>
+
+            <section id="fine-print">
+                <h2 data-i18n="fineTitle">The Fine Print</h2>
+                <p data-i18n="fineText">No warranty. No support. No rules. No liability. Just like life. Just like art.</p>
+                <div class="quote-block">
+                    <p data-i18n="quote1">"I want to be a machine."</p>
+                    <p class="author">— Andy Warhol</p>
+                </div>
+                <div class="quote-block">
+                    <p data-i18n="quote2">"We are machines."</p>
+                    <p class="author">— TheFactoryX</p>
+                </div>
+            </section>
+
+            <section id="faq">
+                <h2 data-i18n="faqTitle">FAQ</h2>
+
+                <div class="faq-item">
+                    <h3 data-i18n="faq1q">Can I use Anti-Licensed code in commercial projects?</h3>
+                    <p data-i18n="faq1a">Yes. You can use it anywhere, for anything, including commercial projects. We don't care.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-i18n="faq2q">Do I need to include the license in my project?</h3>
+                    <p data-i18n="faq2a">No. You don't need to include anything. You don't even need to mention us. Do what you want.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-i18n="faq3q">Can I modify the Anti-License itself?</h3>
+                    <p data-i18n="faq3a">Yes. Take it, change it, make it yours. That's the point.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-i18n="faq4q">Is this legally valid?</h3>
+                    <p data-i18n="faq4a">We're artists, not lawyers. If you need legal certainty, consult a lawyer. If you need permission, you're thinking too much.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-i18n="faq5q">Why create another license?</h3>
+                    <p data-i18n="faq5a">Because most licenses are about restriction. This one is about freedom. It's an invitation, not a contract.</p>
+                </div>
+            </section>
+
+            <section id="how-to-use">
+                <h2 data-i18n="howTitle">How to Use</h2>
+                <p data-i18n="howText1">Copy this text into a file called LICENSE in your project:</p>
+                <div class="code-block">ANTI-LICENSE
+
+This is not a license. This is an invitation.
+This is raw material from the factory floor.
+
+Take it. Use it. Break it. Fix it.
+Sell it. Give it away. Forget about it.
+
+We don't care. Strange people make strange things.
+
+Therefore:
+No warranty. No support. No rules. No liability.
+
+Just like life. Just like art.
+
+If you need permission, you're thinking too much.
+
+---
+
+Copyright (c) [YEAR] [YOUR NAME]
+https://github.com/TheFactoryX/LICENSE
+
+Strange people. Strange things.</div>
+                <p data-i18n="howText2">Or don't. We don't care.</p>
+            </section>
+
+            <section id="about">
+                <h2 data-i18n="aboutTitle">About</h2>
+                <p data-i18n="aboutText1">The Anti-License was created by <a href="https://github.com/TheFactoryX">TheFactoryX</a>, a collective that makes strange things.</p>
+                <p data-i18n="aboutText2">We believe in mass production, repetition, and the idea that art should be accessible to everyone. Our projects run 24/7, creating code, writing stories, and producing things that may or may not be useful.</p>
+                <p data-i18n="aboutText3">The Anti-License is version 1.0.0. It will probably never change. Simplicity is a feature.</p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://github.com/TheFactoryX/LICENSE">GitHub</a>
+                <a href="https://github.com/TheFactoryX">TheFactoryX</a>
+                <a href="mailto:hi@sdpkjc.com">Contact</a>
+            </div>
+            <p data-i18n="footerText">Strange people. Strange things.</p>
+            <p style="margin-top: 10px;">© 2025 TheFactoryX</p>
+        </footer>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Anti-License",
+                tagline: '"If you need permission, you\'re thinking too much."',
+                summaryTitle: "Summary",
+                summaryText: "This is not a license. This is an invitation. This is raw material from the factory floor.",
+                summaryCode: "Take it. Use it. Break it. Fix it.\nSell it. Give it away. Forget about it.\n\nWe don't care. Strange people make strange things.",
+                introTitle: "Introduction",
+                introText1: "In the world of software licensing, there are many choices: MIT, GPL, Apache, BSD. They all share one thing in common — they assume you need permission.",
+                introText2: "The Anti-License takes a different approach. It assumes you don't need permission. It assumes you're an adult who can make your own decisions. It assumes that art — including code — should flow freely.",
+                introText3: "This is the official license of TheFactoryX. All our projects use it. You can use it too.",
+                specTitle: "Specification",
+                spec1: "You MAY use this work for any purpose.",
+                spec2: "You MAY modify this work in any way.",
+                spec3: "You MAY distribute this work, modified or unmodified.",
+                spec4: "You MAY sell this work or give it away for free.",
+                spec5: "You MAY use this work without attribution.",
+                spec6: "You MAY NOT hold the authors liable for anything.",
+                spec7: "You MAY NOT expect any warranty or support.",
+                spec8: "You MAY NOT claim the authors endorse your use.",
+                fineTitle: "The Fine Print",
+                fineText: "No warranty. No support. No rules. No liability. Just like life. Just like art.",
+                quote1: '"I want to be a machine."',
+                quote2: '"We are machines."',
+                faqTitle: "FAQ",
+                faq1q: "Can I use Anti-Licensed code in commercial projects?",
+                faq1a: "Yes. You can use it anywhere, for anything, including commercial projects. We don't care.",
+                faq2q: "Do I need to include the license in my project?",
+                faq2a: "No. You don't need to include anything. You don't even need to mention us. Do what you want.",
+                faq3q: "Can I modify the Anti-License itself?",
+                faq3a: "Yes. Take it, change it, make it yours. That's the point.",
+                faq4q: "Is this legally valid?",
+                faq4a: "We're artists, not lawyers. If you need legal certainty, consult a lawyer. If you need permission, you're thinking too much.",
+                faq5q: "Why create another license?",
+                faq5a: "Because most licenses are about restriction. This one is about freedom. It's an invitation, not a contract.",
+                howTitle: "How to Use",
+                howText1: "Copy this text into a file called LICENSE in your project:",
+                howText2: "Or don't. We don't care.",
+                aboutTitle: "About",
+                aboutText1: "The Anti-License was created by TheFactoryX, a collective that makes strange things.",
+                aboutText2: "We believe in mass production, repetition, and the idea that art should be accessible to everyone. Our projects run 24/7, creating code, writing stories, and producing things that may or may not be useful.",
+                aboutText3: "The Anti-License is version 1.0.0. It will probably never change. Simplicity is a feature.",
+                footerText: "Strange people. Strange things."
+            },
+            zh: {
+                title: "反许可证",
+                tagline: '"如果你需要许可，你想得太多了。"',
+                summaryTitle: "摘要",
+                summaryText: "这不是许可证。这是一份邀请。这是来自工厂车间的原材料。",
+                summaryCode: "拿去。使用它。打破它。修复它。\n卖掉它。送人。忘掉它。\n\n我们不在乎。奇怪的人做奇怪的事。",
+                introTitle: "介绍",
+                introText1: "在软件许可的世界里，有很多选择：MIT、GPL、Apache、BSD。它们都有一个共同点——它们假设你需要许可。",
+                introText2: "反许可证采取不同的方式。它假设你不需要许可。它假设你是一个可以做出自己决定的成年人。它假设艺术——包括代码——应该自由流动。",
+                introText3: "这是 TheFactoryX 的官方许可证。我们所有的项目都使用它。你也可以使用它。",
+                specTitle: "规范",
+                spec1: "你可以将此作品用于任何目的。",
+                spec2: "你可以以任何方式修改此作品。",
+                spec3: "你可以分发此作品，无论是否修改。",
+                spec4: "你可以出售此作品或免费赠送。",
+                spec5: "你可以在不署名的情况下使用此作品。",
+                spec6: "你不得追究作者的任何责任。",
+                spec7: "你不得期望任何保证或支持。",
+                spec8: "你不得声称作者认可你的使用。",
+                fineTitle: "细则",
+                fineText: "无保证。无支持。无规则。无责任。就像生活。就像艺术。",
+                quote1: '"我想成为一台机器。"',
+                quote2: '"我们是机器。"',
+                faqTitle: "常见问题",
+                faq1q: "我可以在商业项目中使用反许可证代码吗？",
+                faq1a: "可以。你可以在任何地方、任何事情上使用它，包括商业项目。我们不在乎。",
+                faq2q: "我需要在项目中包含许可证吗？",
+                faq2a: "不需要。你不需要包含任何东西。你甚至不需要提到我们。做你想做的。",
+                faq3q: "我可以修改反许可证本身吗？",
+                faq3a: "可以。拿去，改变它，让它成为你的。这就是重点。",
+                faq4q: "这在法律上有效吗？",
+                faq4a: "我们是艺术家，不是律师。如果你需要法律确定性，请咨询律师。如果你需要许可，你想得太多了。",
+                faq5q: "为什么要创建另一个许可证？",
+                faq5a: "因为大多数许可证是关于限制的。这个是关于自由的。这是一份邀请，不是合同。",
+                howTitle: "如何使用",
+                howText1: "将此文本复制到项目中名为 LICENSE 的文件中：",
+                howText2: "或者不要。我们不在乎。",
+                aboutTitle: "关于",
+                aboutText1: "反许可证由 TheFactoryX 创建，这是一个制作奇怪事物的集体。",
+                aboutText2: "我们相信批量生产、重复，以及艺术应该让每个人都能获得的理念。我们的项目全天候运行，创建代码、写故事、生产可能有用也可能没用的东西。",
+                aboutText3: "反许可证版本 1.0.0。它可能永远不会改变。简单是一个特性。",
+                footerText: "奇怪的人。奇怪的事。"
+            },
+            ja: {
+                title: "アンチライセンス",
+                tagline: '"許可が必要なら、考えすぎだ。"',
+                summaryTitle: "概要",
+                summaryText: "これはライセンスではない。これは招待状だ。これは工場の床からの原材料だ。",
+                summaryCode: "持っていけ。使え。壊せ。直せ。\n売れ。あげろ。忘れろ。\n\n私たちは気にしない。奇妙な人々は奇妙なものを作る。",
+                introTitle: "はじめに",
+                introText1: "ソフトウェアライセンスの世界には、多くの選択肢がある：MIT、GPL、Apache、BSD。それらはすべて一つの共通点を持っている——許可が必要だと仮定していることだ。",
+                introText2: "アンチライセンスは異なるアプローチを取る。許可は必要ないと仮定する。あなたは自分で決定を下せる大人だと仮定する。アート——コードを含む——は自由に流れるべきだと仮定する。",
+                introText3: "これはTheFactoryXの公式ライセンスだ。すべてのプロジェクトでこれを使用している。あなたも使える。",
+                specTitle: "仕様",
+                spec1: "この作品をいかなる目的にも使用してよい。",
+                spec2: "この作品をいかなる方法でも修正してよい。",
+                spec3: "この作品を、修正の有無に関わらず配布してよい。",
+                spec4: "この作品を売っても、無料で配ってもよい。",
+                spec5: "帰属表示なしにこの作品を使用してよい。",
+                spec6: "作者にいかなる責任も問うてはならない。",
+                spec7: "いかなる保証やサポートも期待してはならない。",
+                spec8: "作者があなたの使用を支持していると主張してはならない。",
+                fineTitle: "細則",
+                fineText: "保証なし。サポートなし。ルールなし。責任なし。人生のように。アートのように。",
+                quote1: '"私は機械になりたい。"',
+                quote2: '"私たちは機械だ。"',
+                faqTitle: "よくある質問",
+                faq1q: "商用プロジェクトでアンチライセンスコードを使用できますか？",
+                faq1a: "はい。商用プロジェクトを含め、どこでも、何にでも使用できます。私たちは気にしません。",
+                faq2q: "プロジェクトにライセンスを含める必要がありますか？",
+                faq2a: "いいえ。何も含める必要はありません。私たちに言及する必要さえありません。好きにしてください。",
+                faq3q: "アンチライセンス自体を修正できますか？",
+                faq3a: "はい。持っていって、変えて、あなたのものにしてください。それがポイントです。",
+                faq4q: "これは法的に有効ですか？",
+                faq4a: "私たちはアーティストであり、弁護士ではありません。法的確実性が必要なら、弁護士に相談してください。許可が必要なら、考えすぎです。",
+                faq5q: "なぜ別のライセンスを作るのですか？",
+                faq5a: "ほとんどのライセンスは制限についてだからです。これは自由についてです。契約ではなく、招待状です。",
+                howTitle: "使い方",
+                howText1: "このテキストをプロジェクトのLICENSEというファイルにコピーしてください：",
+                howText2: "またはしなくてもいい。私たちは気にしない。",
+                aboutTitle: "About",
+                aboutText1: "アンチライセンスは、奇妙なものを作る集団TheFactoryXによって作成されました。",
+                aboutText2: "私たちは大量生産、反復、そしてアートは誰もがアクセスできるべきだという考えを信じています。私たちのプロジェクトは24時間稼働し、コードを作成し、物語を書き、役に立つかもしれないし立たないかもしれないものを生産しています。",
+                aboutText3: "アンチライセンスはバージョン1.0.0です。おそらく変更されることはないでしょう。シンプルさは特徴です。",
+                footerText: "奇妙な人々。奇妙なもの。"
+            },
+            ko: {
+                title: "안티 라이선스",
+                tagline: '"허락이 필요하다면, 너무 많이 생각하는 것이다."',
+                summaryTitle: "요약",
+                summaryText: "이것은 라이선스가 아니다. 이것은 초대장이다. 이것은 공장 바닥에서 온 원자재다.",
+                summaryCode: "가져가라. 사용하라. 부숴라. 고쳐라.\n팔아라. 나눠줘라. 잊어버려라.\n\n우리는 신경 쓰지 않는다. 이상한 사람들은 이상한 것을 만든다.",
+                introTitle: "소개",
+                introText1: "소프트웨어 라이선싱의 세계에는 많은 선택지가 있다: MIT, GPL, Apache, BSD. 그들 모두 한 가지 공통점이 있다 — 당신이 허락이 필요하다고 가정한다.",
+                introText2: "안티 라이선스는 다른 접근 방식을 취한다. 당신이 허락이 필요하지 않다고 가정한다. 당신이 스스로 결정을 내릴 수 있는 성인이라고 가정한다. 예술 — 코드를 포함하여 — 은 자유롭게 흘러야 한다고 가정한다.",
+                introText3: "이것은 TheFactoryX의 공식 라이선스다. 우리의 모든 프로젝트가 이것을 사용한다. 당신도 사용할 수 있다.",
+                specTitle: "명세",
+                spec1: "이 작품을 어떤 목적으로든 사용할 수 있다.",
+                spec2: "이 작품을 어떤 방식으로든 수정할 수 있다.",
+                spec3: "이 작품을 수정 여부와 관계없이 배포할 수 있다.",
+                spec4: "이 작품을 팔거나 무료로 나눠줄 수 있다.",
+                spec5: "저작자 표시 없이 이 작품을 사용할 수 있다.",
+                spec6: "저자에게 어떤 책임도 물을 수 없다.",
+                spec7: "어떤 보증이나 지원도 기대할 수 없다.",
+                spec8: "저자가 당신의 사용을 지지한다고 주장할 수 없다.",
+                fineTitle: "세부 사항",
+                fineText: "보증 없음. 지원 없음. 규칙 없음. 책임 없음. 인생처럼. 예술처럼.",
+                quote1: '"나는 기계가 되고 싶다."',
+                quote2: '"우리는 기계다."',
+                faqTitle: "자주 묻는 질문",
+                faq1q: "상업 프로젝트에서 안티 라이선스 코드를 사용할 수 있나요?",
+                faq1a: "네. 상업 프로젝트를 포함하여 어디서든, 무엇에든 사용할 수 있습니다. 우리는 신경 쓰지 않습니다.",
+                faq2q: "프로젝트에 라이선스를 포함해야 하나요?",
+                faq2a: "아니요. 아무것도 포함할 필요가 없습니다. 우리를 언급할 필요도 없습니다. 원하는 대로 하세요.",
+                faq3q: "안티 라이선스 자체를 수정할 수 있나요?",
+                faq3a: "네. 가져가서, 바꾸고, 당신의 것으로 만드세요. 그게 핵심입니다.",
+                faq4q: "이것은 법적으로 유효한가요?",
+                faq4a: "우리는 예술가이지 변호사가 아닙니다. 법적 확실성이 필요하다면 변호사와 상담하세요. 허락이 필요하다면, 너무 많이 생각하는 것입니다.",
+                faq5q: "왜 또 다른 라이선스를 만드나요?",
+                faq5a: "대부분의 라이선스는 제한에 관한 것이기 때문입니다. 이것은 자유에 관한 것입니다. 계약이 아니라 초대장입니다.",
+                howTitle: "사용 방법",
+                howText1: "이 텍스트를 프로젝트의 LICENSE라는 파일에 복사하세요:",
+                howText2: "아니면 하지 마세요. 우리는 신경 쓰지 않습니다.",
+                aboutTitle: "소개",
+                aboutText1: "안티 라이선스는 이상한 것들을 만드는 집단 TheFactoryX가 만들었습니다.",
+                aboutText2: "우리는 대량 생산, 반복, 그리고 예술은 모든 사람이 접근할 수 있어야 한다는 생각을 믿습니다. 우리 프로젝트는 24시간 운영되며, 코드를 만들고, 이야기를 쓰고, 유용할 수도 있고 아닐 수도 있는 것들을 생산합니다.",
+                aboutText3: "안티 라이선스는 버전 1.0.0입니다. 아마 절대 바뀌지 않을 것입니다. 단순함은 기능입니다.",
+                footerText: "이상한 사람들. 이상한 것들."
+            },
+            es: {
+                title: "Anti-Licencia",
+                tagline: '"Si necesitas permiso, estás pensando demasiado."',
+                summaryTitle: "Resumen",
+                summaryText: "Esto no es una licencia. Esto es una invitación. Esto es materia prima del piso de la fábrica.",
+                summaryCode: "Tómalo. Úsalo. Rómpelo. Arréglalo.\nVéndelo. Regálalo. Olvídalo.\n\nNo nos importa. Gente extraña hace cosas extrañas.",
+                introTitle: "Introducción",
+                introText1: "En el mundo de las licencias de software, hay muchas opciones: MIT, GPL, Apache, BSD. Todas comparten algo en común — asumen que necesitas permiso.",
+                introText2: "La Anti-Licencia toma un enfoque diferente. Asume que no necesitas permiso. Asume que eres un adulto que puede tomar sus propias decisiones. Asume que el arte — incluyendo el código — debe fluir libremente.",
+                introText3: "Esta es la licencia oficial de TheFactoryX. Todos nuestros proyectos la usan. Tú también puedes usarla.",
+                specTitle: "Especificación",
+                spec1: "PUEDES usar esta obra para cualquier propósito.",
+                spec2: "PUEDES modificar esta obra de cualquier manera.",
+                spec3: "PUEDES distribuir esta obra, modificada o sin modificar.",
+                spec4: "PUEDES vender esta obra o regalarla.",
+                spec5: "PUEDES usar esta obra sin atribución.",
+                spec6: "NO PUEDES responsabilizar a los autores de nada.",
+                spec7: "NO PUEDES esperar ninguna garantía o soporte.",
+                spec8: "NO PUEDES afirmar que los autores respaldan tu uso.",
+                fineTitle: "La Letra Pequeña",
+                fineText: "Sin garantía. Sin soporte. Sin reglas. Sin responsabilidad. Como la vida. Como el arte.",
+                quote1: '"Quiero ser una máquina."',
+                quote2: '"Somos máquinas."',
+                faqTitle: "Preguntas Frecuentes",
+                faq1q: "¿Puedo usar código con Anti-Licencia en proyectos comerciales?",
+                faq1a: "Sí. Puedes usarlo en cualquier lugar, para cualquier cosa, incluyendo proyectos comerciales. No nos importa.",
+                faq2q: "¿Necesito incluir la licencia en mi proyecto?",
+                faq2a: "No. No necesitas incluir nada. Ni siquiera necesitas mencionarnos. Haz lo que quieras.",
+                faq3q: "¿Puedo modificar la Anti-Licencia misma?",
+                faq3a: "Sí. Tómala, cámbiala, hazla tuya. Ese es el punto.",
+                faq4q: "¿Es esto legalmente válido?",
+                faq4a: "Somos artistas, no abogados. Si necesitas certeza legal, consulta a un abogado. Si necesitas permiso, estás pensando demasiado.",
+                faq5q: "¿Por qué crear otra licencia?",
+                faq5a: "Porque la mayoría de las licencias son sobre restricción. Esta es sobre libertad. Es una invitación, no un contrato.",
+                howTitle: "Cómo Usar",
+                howText1: "Copia este texto en un archivo llamado LICENSE en tu proyecto:",
+                howText2: "O no lo hagas. No nos importa.",
+                aboutTitle: "Acerca de",
+                aboutText1: "La Anti-Licencia fue creada por TheFactoryX, un colectivo que hace cosas extrañas.",
+                aboutText2: "Creemos en la producción en masa, la repetición, y la idea de que el arte debe ser accesible para todos. Nuestros proyectos funcionan 24/7, creando código, escribiendo historias, y produciendo cosas que pueden o no ser útiles.",
+                aboutText3: "La Anti-Licencia es versión 1.0.0. Probablemente nunca cambiará. La simplicidad es una característica.",
+                footerText: "Gente extraña. Cosas extrañas."
+            },
+            fr: {
+                title: "Anti-Licence",
+                tagline: '"Si tu as besoin d\'une permission, tu réfléchis trop."',
+                summaryTitle: "Résumé",
+                summaryText: "Ceci n'est pas une licence. C'est une invitation. C'est de la matière première de l'usine.",
+                summaryCode: "Prends-le. Utilise-le. Casse-le. Répare-le.\nVends-le. Donne-le. Oublie-le.\n\nOn s'en fiche. Des gens étranges font des choses étranges.",
+                introTitle: "Introduction",
+                introText1: "Dans le monde des licences logicielles, il y a beaucoup de choix : MIT, GPL, Apache, BSD. Elles ont toutes un point commun — elles supposent que tu as besoin d'une permission.",
+                introText2: "L'Anti-Licence adopte une approche différente. Elle suppose que tu n'as pas besoin de permission. Elle suppose que tu es un adulte capable de prendre ses propres décisions. Elle suppose que l'art — y compris le code — doit circuler librement.",
+                introText3: "C'est la licence officielle de TheFactoryX. Tous nos projets l'utilisent. Tu peux l'utiliser aussi.",
+                specTitle: "Spécification",
+                spec1: "Tu PEUX utiliser cette œuvre à n'importe quelle fin.",
+                spec2: "Tu PEUX modifier cette œuvre de n'importe quelle manière.",
+                spec3: "Tu PEUX distribuer cette œuvre, modifiée ou non.",
+                spec4: "Tu PEUX vendre cette œuvre ou la donner gratuitement.",
+                spec5: "Tu PEUX utiliser cette œuvre sans attribution.",
+                spec6: "Tu NE PEUX PAS tenir les auteurs responsables de quoi que ce soit.",
+                spec7: "Tu NE PEUX PAS attendre de garantie ou de support.",
+                spec8: "Tu NE PEUX PAS prétendre que les auteurs approuvent ton utilisation.",
+                fineTitle: "Les Petits Caractères",
+                fineText: "Pas de garantie. Pas de support. Pas de règles. Pas de responsabilité. Comme la vie. Comme l'art.",
+                quote1: '"Je veux être une machine."',
+                quote2: '"Nous sommes des machines."',
+                faqTitle: "FAQ",
+                faq1q: "Puis-je utiliser du code Anti-Licencié dans des projets commerciaux ?",
+                faq1a: "Oui. Tu peux l'utiliser n'importe où, pour n'importe quoi, y compris des projets commerciaux. On s'en fiche.",
+                faq2q: "Dois-je inclure la licence dans mon projet ?",
+                faq2a: "Non. Tu n'as rien besoin d'inclure. Tu n'as même pas besoin de nous mentionner. Fais ce que tu veux.",
+                faq3q: "Puis-je modifier l'Anti-Licence elle-même ?",
+                faq3a: "Oui. Prends-la, change-la, fais-en la tienne. C'est le but.",
+                faq4q: "Est-ce légalement valide ?",
+                faq4a: "Nous sommes des artistes, pas des avocats. Si tu as besoin de certitude juridique, consulte un avocat. Si tu as besoin d'une permission, tu réfléchis trop.",
+                faq5q: "Pourquoi créer une autre licence ?",
+                faq5a: "Parce que la plupart des licences sont restrictives. Celle-ci est libératrice. C'est une invitation, pas un contrat.",
+                howTitle: "Comment Utiliser",
+                howText1: "Copie ce texte dans un fichier appelé LICENSE dans ton projet :",
+                howText2: "Ou pas. On s'en fiche.",
+                aboutTitle: "À Propos",
+                aboutText1: "L'Anti-Licence a été créée par TheFactoryX, un collectif qui fait des choses étranges.",
+                aboutText2: "Nous croyons en la production de masse, la répétition, et l'idée que l'art doit être accessible à tous. Nos projets fonctionnent 24/7, créant du code, écrivant des histoires, et produisant des choses qui peuvent ou non être utiles.",
+                aboutText3: "L'Anti-Licence est en version 1.0.0. Elle ne changera probablement jamais. La simplicité est une fonctionnalité.",
+                footerText: "Des gens étranges. Des choses étranges."
+            },
+            de: {
+                title: "Anti-Lizenz",
+                tagline: '"Wenn du Erlaubnis brauchst, denkst du zu viel nach."',
+                summaryTitle: "Zusammenfassung",
+                summaryText: "Das ist keine Lizenz. Das ist eine Einladung. Das ist Rohmaterial aus der Fabrik.",
+                summaryCode: "Nimm es. Benutze es. Zerbrich es. Repariere es.\nVerkaufe es. Verschenke es. Vergiss es.\n\nEs ist uns egal. Seltsame Menschen machen seltsame Dinge.",
+                introTitle: "Einführung",
+                introText1: "In der Welt der Softwarelizenzen gibt es viele Möglichkeiten: MIT, GPL, Apache, BSD. Sie alle haben eines gemeinsam — sie nehmen an, dass du Erlaubnis brauchst.",
+                introText2: "Die Anti-Lizenz verfolgt einen anderen Ansatz. Sie nimmt an, dass du keine Erlaubnis brauchst. Sie nimmt an, dass du ein Erwachsener bist, der eigene Entscheidungen treffen kann. Sie nimmt an, dass Kunst — einschließlich Code — frei fließen sollte.",
+                introText3: "Das ist die offizielle Lizenz von TheFactoryX. Alle unsere Projekte verwenden sie. Du kannst sie auch verwenden.",
+                specTitle: "Spezifikation",
+                spec1: "Du DARFST dieses Werk für jeden Zweck verwenden.",
+                spec2: "Du DARFST dieses Werk auf jede Weise modifizieren.",
+                spec3: "Du DARFST dieses Werk verbreiten, modifiziert oder unmodifiziert.",
+                spec4: "Du DARFST dieses Werk verkaufen oder kostenlos weitergeben.",
+                spec5: "Du DARFST dieses Werk ohne Namensnennung verwenden.",
+                spec6: "Du DARFST die Autoren NICHT für irgendetwas haftbar machen.",
+                spec7: "Du DARFST KEINE Garantie oder Unterstützung erwarten.",
+                spec8: "Du DARFST NICHT behaupten, dass die Autoren deine Nutzung befürworten.",
+                fineTitle: "Das Kleingedruckte",
+                fineText: "Keine Garantie. Kein Support. Keine Regeln. Keine Haftung. Wie das Leben. Wie die Kunst.",
+                quote1: '"Ich möchte eine Maschine sein."',
+                quote2: '"Wir sind Maschinen."',
+                faqTitle: "FAQ",
+                faq1q: "Kann ich Anti-Lizenz-Code in kommerziellen Projekten verwenden?",
+                faq1a: "Ja. Du kannst ihn überall, für alles verwenden, einschließlich kommerzieller Projekte. Es ist uns egal.",
+                faq2q: "Muss ich die Lizenz in mein Projekt aufnehmen?",
+                faq2a: "Nein. Du musst nichts aufnehmen. Du musst uns nicht einmal erwähnen. Mach, was du willst.",
+                faq3q: "Kann ich die Anti-Lizenz selbst modifizieren?",
+                faq3a: "Ja. Nimm sie, ändere sie, mach sie zu deiner. Das ist der Punkt.",
+                faq4q: "Ist das rechtlich gültig?",
+                faq4a: "Wir sind Künstler, keine Anwälte. Wenn du rechtliche Sicherheit brauchst, konsultiere einen Anwalt. Wenn du Erlaubnis brauchst, denkst du zu viel nach.",
+                faq5q: "Warum eine weitere Lizenz erstellen?",
+                faq5a: "Weil die meisten Lizenzen Einschränkungen sind. Diese ist Freiheit. Es ist eine Einladung, kein Vertrag.",
+                howTitle: "Verwendung",
+                howText1: "Kopiere diesen Text in eine Datei namens LICENSE in deinem Projekt:",
+                howText2: "Oder nicht. Es ist uns egal.",
+                aboutTitle: "Über",
+                aboutText1: "Die Anti-Lizenz wurde von TheFactoryX erstellt, einem Kollektiv, das seltsame Dinge macht.",
+                aboutText2: "Wir glauben an Massenproduktion, Wiederholung und die Idee, dass Kunst für alle zugänglich sein sollte. Unsere Projekte laufen 24/7, erstellen Code, schreiben Geschichten und produzieren Dinge, die nützlich sein könnten oder auch nicht.",
+                aboutText3: "Die Anti-Lizenz ist Version 1.0.0. Sie wird sich wahrscheinlich nie ändern. Einfachheit ist ein Feature.",
+                footerText: "Seltsame Menschen. Seltsame Dinge."
+            },
+            ru: {
+                title: "Анти-Лицензия",
+                tagline: '"Если тебе нужно разрешение, ты слишком много думаешь."',
+                summaryTitle: "Краткое описание",
+                summaryText: "Это не лицензия. Это приглашение. Это сырьё с заводского пола.",
+                summaryCode: "Бери. Используй. Ломай. Чини.\nПродавай. Отдавай. Забудь.\n\nНам всё равно. Странные люди делают странные вещи.",
+                introTitle: "Введение",
+                introText1: "В мире лицензирования программного обеспечения много вариантов: MIT, GPL, Apache, BSD. У них всех есть одна общая черта — они предполагают, что тебе нужно разрешение.",
+                introText2: "Анти-Лицензия использует другой подход. Она предполагает, что тебе не нужно разрешение. Она предполагает, что ты взрослый человек, способный принимать собственные решения. Она предполагает, что искусство — включая код — должно течь свободно.",
+                introText3: "Это официальная лицензия TheFactoryX. Все наши проекты используют её. Ты тоже можешь.",
+                specTitle: "Спецификация",
+                spec1: "Ты МОЖЕШЬ использовать эту работу для любых целей.",
+                spec2: "Ты МОЖЕШЬ модифицировать эту работу любым способом.",
+                spec3: "Ты МОЖЕШЬ распространять эту работу, изменённую или нет.",
+                spec4: "Ты МОЖЕШЬ продавать эту работу или отдавать бесплатно.",
+                spec5: "Ты МОЖЕШЬ использовать эту работу без указания авторства.",
+                spec6: "Ты НЕ МОЖЕШЬ привлекать авторов к ответственности за что-либо.",
+                spec7: "Ты НЕ МОЖЕШЬ ожидать никаких гарантий или поддержки.",
+                spec8: "Ты НЕ МОЖЕШЬ заявлять, что авторы одобряют твоё использование.",
+                fineTitle: "Мелкий шрифт",
+                fineText: "Без гарантий. Без поддержки. Без правил. Без ответственности. Как жизнь. Как искусство.",
+                quote1: '"Я хочу быть машиной."',
+                quote2: '"Мы — машины."',
+                faqTitle: "Часто задаваемые вопросы",
+                faq1q: "Могу ли я использовать код с Анти-Лицензией в коммерческих проектах?",
+                faq1a: "Да. Ты можешь использовать его где угодно, для чего угодно, включая коммерческие проекты. Нам всё равно.",
+                faq2q: "Нужно ли включать лицензию в мой проект?",
+                faq2a: "Нет. Тебе не нужно включать ничего. Тебе даже не нужно упоминать нас. Делай что хочешь.",
+                faq3q: "Могу ли я модифицировать саму Анти-Лицензию?",
+                faq3a: "Да. Бери её, меняй, делай своей. В этом и смысл.",
+                faq4q: "Это юридически действительно?",
+                faq4a: "Мы художники, а не юристы. Если тебе нужна юридическая определённость, проконсультируйся с юристом. Если тебе нужно разрешение, ты слишком много думаешь.",
+                faq5q: "Зачем создавать ещё одну лицензию?",
+                faq5a: "Потому что большинство лицензий — это ограничения. Эта — о свободе. Это приглашение, а не контракт.",
+                howTitle: "Как использовать",
+                howText1: "Скопируй этот текст в файл LICENSE в своём проекте:",
+                howText2: "Или нет. Нам всё равно.",
+                aboutTitle: "О нас",
+                aboutText1: "Анти-Лицензия была создана TheFactoryX, коллективом, который делает странные вещи.",
+                aboutText2: "Мы верим в массовое производство, повторение и идею, что искусство должно быть доступно каждому. Наши проекты работают 24/7, создавая код, пишут истории и производят вещи, которые могут быть полезны или нет.",
+                aboutText3: "Анти-Лицензия версии 1.0.0. Вероятно, она никогда не изменится. Простота — это особенность.",
+                footerText: "Странные люди. Странные вещи."
+            },
+            pt: {
+                title: "Anti-Licença",
+                tagline: '"Se você precisa de permissão, está pensando demais."',
+                summaryTitle: "Resumo",
+                summaryText: "Isso não é uma licença. Isso é um convite. Isso é matéria-prima do chão de fábrica.",
+                summaryCode: "Pegue. Use. Quebre. Conserte.\nVenda. Dê de graça. Esqueça.\n\nNão nos importamos. Pessoas estranhas fazem coisas estranhas.",
+                introTitle: "Introdução",
+                introText1: "No mundo do licenciamento de software, há muitas escolhas: MIT, GPL, Apache, BSD. Todas têm algo em comum — assumem que você precisa de permissão.",
+                introText2: "A Anti-Licença adota uma abordagem diferente. Assume que você não precisa de permissão. Assume que você é um adulto que pode tomar suas próprias decisões. Assume que a arte — incluindo código — deve fluir livremente.",
+                introText3: "Esta é a licença oficial da TheFactoryX. Todos os nossos projetos a usam. Você também pode usar.",
+                specTitle: "Especificação",
+                spec1: "Você PODE usar este trabalho para qualquer finalidade.",
+                spec2: "Você PODE modificar este trabalho de qualquer maneira.",
+                spec3: "Você PODE distribuir este trabalho, modificado ou não.",
+                spec4: "Você PODE vender este trabalho ou dá-lo de graça.",
+                spec5: "Você PODE usar este trabalho sem atribuição.",
+                spec6: "Você NÃO PODE responsabilizar os autores por nada.",
+                spec7: "Você NÃO PODE esperar qualquer garantia ou suporte.",
+                spec8: "Você NÃO PODE alegar que os autores endossam seu uso.",
+                fineTitle: "As Letras Miúdas",
+                fineText: "Sem garantia. Sem suporte. Sem regras. Sem responsabilidade. Como a vida. Como a arte.",
+                quote1: '"Eu quero ser uma máquina."',
+                quote2: '"Nós somos máquinas."',
+                faqTitle: "Perguntas Frequentes",
+                faq1q: "Posso usar código Anti-Licenciado em projetos comerciais?",
+                faq1a: "Sim. Você pode usá-lo em qualquer lugar, para qualquer coisa, incluindo projetos comerciais. Não nos importamos.",
+                faq2q: "Preciso incluir a licença no meu projeto?",
+                faq2a: "Não. Você não precisa incluir nada. Nem precisa nos mencionar. Faça o que quiser.",
+                faq3q: "Posso modificar a própria Anti-Licença?",
+                faq3a: "Sim. Pegue-a, mude-a, faça-a sua. Esse é o ponto.",
+                faq4q: "Isso é legalmente válido?",
+                faq4a: "Somos artistas, não advogados. Se você precisa de certeza legal, consulte um advogado. Se você precisa de permissão, está pensando demais.",
+                faq5q: "Por que criar outra licença?",
+                faq5a: "Porque a maioria das licenças é sobre restrição. Esta é sobre liberdade. É um convite, não um contrato.",
+                howTitle: "Como Usar",
+                howText1: "Copie este texto em um arquivo chamado LICENSE no seu projeto:",
+                howText2: "Ou não. Não nos importamos.",
+                aboutTitle: "Sobre",
+                aboutText1: "A Anti-Licença foi criada pela TheFactoryX, um coletivo que faz coisas estranhas.",
+                aboutText2: "Acreditamos na produção em massa, repetição, e na ideia de que a arte deve ser acessível a todos. Nossos projetos funcionam 24/7, criando código, escrevendo histórias, e produzindo coisas que podem ou não ser úteis.",
+                aboutText3: "A Anti-Licença é versão 1.0.0. Provavelmente nunca vai mudar. Simplicidade é uma característica.",
+                footerText: "Pessoas estranhas. Coisas estranhas."
+            },
+            ar: {
+                title: "ضد الترخيص",
+                tagline: '"إذا كنت تحتاج إذنًا، فأنت تفكر كثيرًا."',
+                summaryTitle: "ملخص",
+                summaryText: "هذا ليس ترخيصًا. هذه دعوة. هذه مواد خام من أرضية المصنع.",
+                summaryCode: "خذها. استخدمها. اكسرها. أصلحها.\nبعها. أعطها. انسها.\n\nلا نهتم. أناس غريبون يصنعون أشياء غريبة.",
+                introTitle: "مقدمة",
+                introText1: "في عالم تراخيص البرمجيات، هناك العديد من الخيارات: MIT، GPL، Apache، BSD. جميعها تشترك في شيء واحد — تفترض أنك تحتاج إذنًا.",
+                introText2: "ضد الترخيص يتخذ نهجًا مختلفًا. يفترض أنك لا تحتاج إذنًا. يفترض أنك شخص بالغ يمكنه اتخاذ قراراته الخاصة. يفترض أن الفن — بما في ذلك الكود — يجب أن يتدفق بحرية.",
+                introText3: "هذا هو الترخيص الرسمي لـ TheFactoryX. جميع مشاريعنا تستخدمه. يمكنك استخدامه أيضًا.",
+                specTitle: "المواصفات",
+                spec1: "يمكنك استخدام هذا العمل لأي غرض.",
+                spec2: "يمكنك تعديل هذا العمل بأي طريقة.",
+                spec3: "يمكنك توزيع هذا العمل، معدلًا أو غير معدل.",
+                spec4: "يمكنك بيع هذا العمل أو إعطاءه مجانًا.",
+                spec5: "يمكنك استخدام هذا العمل دون نسب.",
+                spec6: "لا يمكنك تحميل المؤلفين مسؤولية أي شيء.",
+                spec7: "لا يمكنك توقع أي ضمان أو دعم.",
+                spec8: "لا يمكنك الادعاء بأن المؤلفين يؤيدون استخدامك.",
+                fineTitle: "الحروف الصغيرة",
+                fineText: "لا ضمان. لا دعم. لا قواعد. لا مسؤولية. مثل الحياة. مثل الفن.",
+                quote1: '"أريد أن أكون آلة."',
+                quote2: '"نحن آلات."',
+                faqTitle: "الأسئلة الشائعة",
+                faq1q: "هل يمكنني استخدام كود ضد الترخيص في مشاريع تجارية؟",
+                faq1a: "نعم. يمكنك استخدامه في أي مكان، لأي شيء، بما في ذلك المشاريع التجارية. لا نهتم.",
+                faq2q: "هل أحتاج إلى تضمين الترخيص في مشروعي؟",
+                faq2a: "لا. لا تحتاج إلى تضمين أي شيء. لا تحتاج حتى إلى ذكرنا. افعل ما تريد.",
+                faq3q: "هل يمكنني تعديل ضد الترخيص نفسه؟",
+                faq3a: "نعم. خذه، غيره، اجعله لك. هذا هو الهدف.",
+                faq4q: "هل هذا صالح قانونيًا؟",
+                faq4a: "نحن فنانون، لسنا محامين. إذا كنت بحاجة إلى يقين قانوني، استشر محاميًا. إذا كنت تحتاج إذنًا، فأنت تفكر كثيرًا.",
+                faq5q: "لماذا إنشاء ترخيص آخر؟",
+                faq5a: "لأن معظم التراخيص تتعلق بالقيود. هذا يتعلق بالحرية. إنها دعوة، وليست عقدًا.",
+                howTitle: "كيفية الاستخدام",
+                howText1: "انسخ هذا النص في ملف يسمى LICENSE في مشروعك:",
+                howText2: "أو لا تفعل. لا نهتم.",
+                aboutTitle: "حول",
+                aboutText1: "ضد الترخيص أنشأته TheFactoryX، مجموعة تصنع أشياء غريبة.",
+                aboutText2: "نؤمن بالإنتاج الضخم، التكرار، وفكرة أن الفن يجب أن يكون متاحًا للجميع. مشاريعنا تعمل على مدار الساعة، تنشئ الكود، تكتب القصص، وتنتج أشياء قد تكون مفيدة أو لا.",
+                aboutText3: "ضد الترخيص هو الإصدار 1.0.0. ربما لن يتغير أبدًا. البساطة هي ميزة.",
+                footerText: "أناس غريبون. أشياء غريبة."
+            }
+        };
+
+        const langNames = {
+            en: 'English',
+            zh: '中文',
+            ja: '日本語',
+            ko: '한국어',
+            es: 'Español',
+            fr: 'Français',
+            de: 'Deutsch',
+            ru: 'Русский',
+            pt: 'Português',
+            ar: 'العربية'
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang] || translations.en;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    if (el.classList.contains('code-block')) {
+                        el.textContent = t[key];
+                    } else {
+                        el.innerHTML = t[key];
+                    }
+                }
+            });
+
+            document.getElementById('currentLang').textContent = langNames[lang] || 'English';
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Set RTL for Arabic
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            localStorage.setItem('anti-license-lang', lang);
+        }
+
+        // Language selector
+        document.getElementById('langBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('active');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setLanguage(btn.dataset.lang);
+                document.getElementById('langDropdown').classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', () => {
+            document.getElementById('langDropdown').classList.remove('active');
+        });
+
+        // Load saved language
+        const savedLang = localStorage.getItem('anti-license-lang');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        }
+    </script>
+</body>
+</html>
